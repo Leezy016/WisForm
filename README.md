@@ -1,2 +1,3 @@
 # WisForm
-Form collectiing App
+Form collecting Web App  
+SpringBoot Vue3 Neo4j  
