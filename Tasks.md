@@ -29,7 +29,7 @@ WisForm
 - 集成测试  验收测试  
 - 最终部署  维护  
 - 文档整理  
-- 演示汇报  PPT  
+- 演示汇报  PPT  15min  展示代码质量  
 - 提交  
 **产出**  基本功能实现的可运行程序  文档  
 
@@ -160,5 +160,12 @@ Docker部署
 总体设计  最先完成  关联到前后端设计  
 Docker部署  
 
+[neo4j/neo4j: Graphs for Everyone (github.com)](https://github.com/neo4j/neo4j)  
+[Neo4j Graph Database & Analytics | Graph Database Management System](https://neo4j.com/)  
+
 # 部署  
 [超详细Docker部署SpringBoot+Vue项目](https://blog.csdn.net/qq_52030824/article/details/127982206)  
+
+语义检索  前30%  业绩最好的两个副教授  
+
+
