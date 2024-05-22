@@ -30,6 +30,7 @@ MATCH (p:Person {name: 'Tom Hanks'})
 RETURN  p.born
 ```
 
+
 ##### WHERE  
 ```Cypher
 MATCH (p:Person)
