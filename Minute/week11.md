@@ -30,7 +30,7 @@
 | Maven      | 3.8  |
 | Springboot | 3    |
 | Vue        | 3    |
-| Neo4j      | 5    |
+| Neo4j      | 1.5  |
 | Postman    | 11   |
 
 3. 安排本周任务  
