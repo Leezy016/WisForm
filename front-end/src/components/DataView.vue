@@ -4,6 +4,7 @@
     <input type="text" v-model="searchQuery" placeholder="搜索关键字">
     <button @click="search">搜索</button>
     <button @click="reset">重置</button>
+    <!---->
     
     <table>
       <thead>
