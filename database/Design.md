@@ -37,7 +37,7 @@ WisForm = 学院 + 问卷
     "项目"
   ],
   "properties": {
-    "time": "2006",
+    "time": "2016",
     "name": "关于计算机的研究",
     "作者类型": "通讯作者",
     "projectType": "论文"
