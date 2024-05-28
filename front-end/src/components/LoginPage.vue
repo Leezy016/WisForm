@@ -23,12 +23,13 @@
 
 <script>
 import axios from 'axios';
+import router from '../router';
 export default {
   data() {
     return {
       username: '',
       password: '',
-      identity: 'user', // 默认选择普通用户
+      permissions:[],// 用户权限列表
       loginError: '' // 登录错误信息
     };
   },
@@ -38,15 +39,15 @@ export default {
        axios.post('http://localhost:8080/api/login', {
         username: this.username,
         password: this.password,
-        identity: this.identity
       })
       .then(response=>{
         //处理后端响应
          if (response.data.success) {
         // 登录成功
 
-
+        router.push('/form-fill');
         
+
         }
        else {
         // 登录失败，显示错误信息
