@@ -12,9 +12,18 @@
         </div>  
         <div>  
           <label for="role">身份:</label>  
-          <select id="role" v-model="role" required>  
-            <option value="user">普通用户</option>  
-            <option value="admin">管理员</option>  
+          <select id="role" v-model="role" @change="checkDean" required>    
+            <option value="dean">院长</option>    
+            <option value="chair">系主任</option>   
+            <option value="teacher">老师</option> 
+          </select>  
+        </div>  
+        <div v-if="isNotDean">  
+          <label for="department">系别:</label>    
+          <select id="department" v-model="department">  
+            <option value="CS">计算机科学与技术</option>  
+            <option value="IS">信息安全</option>  
+            <!-- 其他系别 -->  
           </select>  
         </div>  
         <button type="submit">注册</button>  
@@ -33,13 +42,15 @@ export default {
     return {  
       username: '',  
       password: '',  
-      role: 'user',  
+      role: 'dean', 
+      department:'',
+      isNotDean:false,
       errorMessage: '',  
     };  
   },  
   methods: {  
     handleSubmit() {  
-      if (!this.username || !this.password || !this.role) {  
+      if (!this.username || !this.password || !this.role||(this.role!=='dean'&&!this.department)) {  
         this.errorMessage = '请填写所有必填项';  
         return;  
       }  
@@ -49,7 +60,8 @@ export default {
       axios.post('http://localhost:8080/api/register', {  
         username: this.username,  
         password: this.password,  
-        role: this.role  
+        role: this.role , 
+        department:this.department
       })  
       .then(response => {  
         if (response.data.success) {
@@ -70,10 +82,16 @@ export default {
           this.errorMessage = '注册失败，请稍后再试';
         }
       });  
+    }, 
+    checkDean() {  
+      // 当身份选择变化时，检查是否为系主任  
+      if(this.role==='dean')
+      this.isNotDean = false;
+      else
+      this.isNotDean = true;
     },  
   },  
 };  
- 
   </script>  
     
   <style scoped>  
