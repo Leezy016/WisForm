@@ -50,10 +50,23 @@ export default {
   },  
   methods: {  
     handleSubmit() {  
-      if (!this.username || !this.password || !this.role||(this.role!=='dean'&&!this.dean)) {  
-        this.errorMessage = '请填写所有必填项';  
+      if (!this.username){
+        this.errorMessage = '请填写用户名';  
         return;  
-      }  
+      } 
+      if (!this.password){
+        this.errorMessage = '请填写密码';  
+        return;  
+      }
+      if (!this.role){
+        this.errorMessage = '请填写用户身份';  
+        return;  
+      } 
+      if (this.role!='dean' && !this.department){
+        this.errorMessage = '请填写所处院系';  
+        return;  
+      } 
+
 
       this.errorMessage = '';  
 
