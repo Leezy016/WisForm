@@ -21,9 +21,9 @@ jobs:
         distribution: 'adopt'  
   
     # 编译后端Java项目  
-    - name: Build with Maven  
-      working-directory: ./back-end  # 设置工作目录为 ./back  
-      run: mvn clean package -DskipTests  
+   # - name: Build with Maven  
+     # working-directory: ./back-end  # 设置工作目录为 ./back  
+     # run: mvn clean package -DskipTests  
   
     # 安装Node.js环境（如果需要）  
     - name: Set up Node.js  
