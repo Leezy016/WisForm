@@ -50,7 +50,7 @@ export default {
   },  
   methods: {  
     handleSubmit() {  
-      if (!this.username || !this.password || !this.role||(this.role!=='dean'&&!this.department)) {  
+      if (!this.username || !this.password || !this.role||(this.role!=='dean'&&!this.dean)) {  
         this.errorMessage = '请填写所有必填项';  
         return;  
       }  
@@ -84,7 +84,7 @@ export default {
       });  
     }, 
     checkDean() {  
-      // 当身份选择变化时，检查是否为系主任  
+      // 当身份选择变化时，检查是否为院长 
       if(this.role==='dean')
       this.isNotDean = false;
       else
