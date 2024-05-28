@@ -5,7 +5,9 @@ import HomePage from '../components/HomePage.vue';
 import LoginPage from '../components/LoginPage.vue';
 import DataView from '../components/DataView.vue';
 import Registation from '../components/Registation.vue';
-import UserManagement from '../components/UserManagement.vue'; // 修改导入的组件名
+import UserManagement from '../components/UserManagement.vue'; 
+import FormFill from '../components/FormFill.vue';
+
 
 const routes = [
     {
@@ -51,6 +53,11 @@ const routes = [
         path: '/regist',
         name: 'Registation',
         component: Registation,
+    },
+    {
+        path: '/form-fill',
+        name: 'FormFill',
+        component: FormFill,
     }
 ];
 

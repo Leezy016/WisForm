@@ -44,14 +44,10 @@ export default {
         //处理后端响应
          if (response.data.success) {
         // 登录成功
-        if (this.identity === 'admin') {
-        // 管理员身份登录成功
-        this.$router.push({ name: 'AdminDashboard' });
-      }else if(this.identity==='user'){
-        // 普通用户身份登录成功,this.username === 'user' && this.password === 'user' && this.identity === 'user'
-        this.$router.push({ name: 'UserDashboard' }); // 普通用户登录成功后跳转到用户页面
-      } 
-       this.loginError = '';}
+
+
+        
+        }
        else {
         // 登录失败，显示错误信息
         this.loginError =  response.data.message || '登录失败，请稍后重试！';}
