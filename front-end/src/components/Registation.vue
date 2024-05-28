@@ -24,53 +24,56 @@
   </template>  
     
   <script>  
-  import router from '../router';
-  export default {  
-    name: 'RegisterForm',  
-    data() {  
-      return {  
-        username: '',  
-        password: '',  
-        role: 'user',  
-        errorMessage: '',  
-      };  
-    },  
-    methods: {  
-      handleSubmit() {  
-        // 这里只是前端验证，实际注册逻辑需要发送到后端处理  
-        if (!this.username || !this.password || !this.role) {  
-          this.errorMessage = '请填写所有必填项';  
-          return;  
-        }  
-    
-        // 假设后端注册成功，清除错误信息  
-        this.errorMessage = '';  
-    
-        // 这里应该发送一个请求到后端进行注册  
-        // 例如使用 axios 或 fetch API  
-        // 示例：  
-        // axios.post('/api/register', {  
-        //   username: this.username,  
-        //   password: this.password,  
-        //   role: this.role  
-        // })  
-        // .then(response => {  
-        //   // 注册成功处理逻辑  
-        //   console.log('注册成功');  
-        // })  
-        // .catch(error => {  
-        //   // 注册失败处理逻辑  
-        //   this.errorMessage = '注册失败，请稍后再试';  
-        // });  
+import router from '../router';
+import axios from 'axios';
 
+export default {  
+  name: 'RegisterForm',  
+  data() {  
+    return {  
+      username: '',  
+      password: '',  
+      role: 'user',  
+      errorMessage: '',  
+    };  
+  },  
+  methods: {  
+    handleSubmit() {  
+      if (!this.username || !this.password || !this.role) {  
+        this.errorMessage = '请填写所有必填项';  
+        return;  
+      }  
+
+      this.errorMessage = '';  
+
+      axios.post('http://localhost:8080/api/register', {  
+        username: this.username,  
+        password: this.password,  
+        role: this.role  
+      })  
+      .then(response => {  
+        if (response.data.success) {
+        // 注册成功处理逻辑  
+        console.log('注册成功');
         // 使用router.push跳转到/login页面  
         router.push('/login'); 
-    
-        // 在这个示例中，我们仅模拟注册成功  
-        alert('注册成功！');  
-      },  
+        alert('注册成功！');
+        }else {  
+          this.errorMessage = response.data.message || '注册失败了，请稍后再试';  
+        }
+      })  
+      .catch(error => {  
+        if (error.response) {  
+          // 后端返回的错误信息
+          this.errorMessage = error.response.data;   
+        }else {
+          this.errorMessage = '注册失败，请稍后再试';
+        }
+      });  
     },  
-  };  
+  },  
+};  
+ 
   </script>  
     
   <style scoped>  
