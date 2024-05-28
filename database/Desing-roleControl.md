@@ -1,20 +1,26 @@
 ### 角色控制访问
-设计1
+
 ![](image/角色控制访问设计.png)
-设计2
+
 ```json
 // 角色控制访问表
 {
   "labels": [
-    "角色控制访问"
+    "roleControl"
   ],
   "properties": {
-    "院长": [1,2,3],
-    "系主任":[1,2,3],
-    "老师":[3]
+    name:'rc',
+    dean: [1,2,3],
+    chair:[1,2,3],
+    teacher:[3]
   },
   "elementId": "78"
 }
 //1-查看表格
 //2-创建表格
 //3-填写表格
+```
+### 创建语句
+```Cypher
+create (n:roleControl{name:'rc',dean:[1,2,3],chair:[1,2,3],teacher:[3]}) 
+```g
