@@ -5,6 +5,7 @@
       <ul class="nav-links">
         <li><router-link to="/" class="nav-item">回首页</router-link></li>
         <li><router-link to="/login" class="nav-item">去登陆</router-link></li>
+        <li><router-link to="/regist" class="nav-item">去注册</router-link></li>
       </ul>
     </nav>
     <div class="white-bar"></div>

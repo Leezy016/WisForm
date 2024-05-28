@@ -1,5 +1,5 @@
 <!-- src/components/UserDashboard.vue -->
-
+<!--/user-->
 <template>
     <div class="user-dashboard">
         <h2>欢迎, 普通用户</h2>

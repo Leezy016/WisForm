@@ -4,6 +4,7 @@ import UserDashboard from '../components/UserDashboard.vue';
 import HomePage from '../components/HomePage.vue';
 import LoginPage from '../components/LoginPage.vue';
 import DataView from '../components/DataView.vue';
+import Registation from '../components/Registation.vue';
 import UserManagement from '../components/UserManagement.vue'; // 修改导入的组件名
 
 const routes = [
@@ -45,6 +46,11 @@ const routes = [
         meta: {
             requiresAuth: true,
         }
+    },
+    {
+        path: '/regist',
+        name: 'Registation',
+        component: Registation,
     }
 ];
 
