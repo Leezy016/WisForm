@@ -1,17 +1,17 @@
 package com.wisform.entity;
 
-import java.util.List;
-
-public class LoginForm {
+public class RegistForm {
     private String username;
     private String password;
-    private List<Long> permissions;
-    private String identity;
+    private String role;
+    private String department;
 
 
-    public LoginForm(String username, String password, String identity) {
+    public RegistForm(String username, String password, String role, String department) {
         this.username = username;
         this.password = password;
+        this.role = role;
+        this.department = department;
     }
 
     public String getUsername() {
@@ -23,7 +23,9 @@ public class LoginForm {
     }
 
     public String getIdentity() {
-        return this.identity;
+        return role;}
+
+    public String getDepartment(){
+        return department;
     }
 }
-
