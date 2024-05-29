@@ -9,7 +9,7 @@ public class LoginForm {
     private String identity;
 
 
-    public LoginForm(String username, String password, String identity) {
+    public LoginForm(String username, String password) {
         this.username = username;
         this.password = password;
     }
