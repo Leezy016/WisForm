@@ -14,7 +14,6 @@
 </template>
 
 <style>
-
 .navbar {
   background-color: #5599ff; /* 导航栏背景颜色 */
   padding: 5px 0; /* 导航栏上下内边距 */

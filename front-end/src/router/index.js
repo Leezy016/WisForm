@@ -7,7 +7,8 @@ import DataView from '../components/DataView.vue';
 import Registation from '../components/Registation.vue';
 import UserManagement from '../components/UserManagement.vue'; 
 import FormFill from '../components/FormFill.vue';
-
+import FormView from '../components/FormView.vue';
+import FormCreat from '../components/FormCreat.vue';
 
 const routes = [
     {
@@ -58,6 +59,16 @@ const routes = [
         path: '/form-fill',
         name: 'FormFill',
         component: FormFill,
+    },
+    {
+        path: '/form-view',
+        name: 'FormView',
+        component: FormView,
+    },
+    {
+        path: '/form-creat',
+        name: 'FormCreat',
+        component: FormCreat,
     }
 ];
 

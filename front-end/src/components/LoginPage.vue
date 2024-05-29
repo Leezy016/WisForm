@@ -10,11 +10,6 @@
         <label for="password">密码：</label>
         <input type="password" id="password" v-model="password" placeholder="请输入密码" required>
       </div>
-      <div>
-        <label>身份：</label>
-        <label><input type="radio" v-model="identity" value="admin">管理员</label>
-        <label><input type="radio" v-model="identity" value="user">普通用户</label>
-      </div>
       <button type="submit">登录</button>
     </form>
     <p v-if="loginError" class="error-message">{{ loginError }}</p>
@@ -44,9 +39,8 @@ export default {
         //处理后端响应
          if (response.data.success) {
         // 登录成功
-
         router.push('/form-fill');
-        
+        this.$store.commit('SET_PERMISSIONS', response.data.permissions);  
 
         }
        else {
