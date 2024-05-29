@@ -18,7 +18,6 @@
 
 <script>
 import axios from 'axios';
-import router from '../router';
 export default {
   data() {
     return {
@@ -36,11 +35,17 @@ export default {
         password: this.password,
       })
       .then(response=>{
+        //console.log(response.data)
         //处理后端响应
-         if (response.data.success) {
-        // 登录成功
-        router.push('/form-fill');
-        this.$store.commit('SET_PERMISSIONS', response.data.permissions);  
+        const permissionsString = response.data.permissions.join(',');
+        if (response.data.success) {
+        this.$router.push({ 
+          name: 'FormFill', 
+          params: { 
+          username: this.username,
+          role: permissionsString // 将权限信息转换为字符串传递给组件
+          } 
+      });
 
         }
        else {
