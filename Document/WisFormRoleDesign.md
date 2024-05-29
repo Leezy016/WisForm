@@ -1,6 +1,6 @@
 ### 角色控制访问
 
-![](image/角色控制访问设计.png)
+![](RoleDesign.png)
 
 ```json
 // 角色控制访问表
