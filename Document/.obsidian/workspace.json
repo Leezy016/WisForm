@@ -9,6 +9,10 @@
         "children": [
           {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0eb223f1 (rename file)
             "id": "891cd93611308852",
             "type": "leaf",
             "state": {
@@ -21,8 +25,12 @@
             }
           },
           {
+<<<<<<< HEAD
 =======
 >>>>>>> b36f1b2c (commit and get new)
+=======
+>>>>>>> 45e33a18 (doc restruct)
+>>>>>>> 0eb223f1 (rename file)
             "id": "39ab877557dee651",
             "type": "leaf",
             "state": {
@@ -101,10 +109,17 @@
               "type": "backlink",
               "state": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "file": "WisFormRoleDesign.md",
 =======
                 "file": "Minute/week13.md",
 >>>>>>> b36f1b2c (commit and get new)
+=======
+                "file": "Minute/week13.md",
+=======
+                "file": "WisFormRoleDesign.md",
+>>>>>>> 45e33a18 (doc restruct)
+>>>>>>> 0eb223f1 (rename file)
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,10 +137,17 @@
               "type": "outgoing-link",
               "state": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "file": "WisFormRoleDesign.md",
 =======
                 "file": "Minute/week13.md",
 >>>>>>> b36f1b2c (commit and get new)
+=======
+                "file": "Minute/week13.md",
+=======
+                "file": "WisFormRoleDesign.md",
+>>>>>>> 45e33a18 (doc restruct)
+>>>>>>> 0eb223f1 (rename file)
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,10 +171,17 @@
               "type": "outline",
               "state": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "file": "WisFormRoleDesign.md"
 =======
                 "file": "Minute/week13.md"
 >>>>>>> b36f1b2c (commit and get new)
+=======
+                "file": "Minute/week13.md"
+=======
+                "file": "WisFormRoleDesign.md"
+>>>>>>> 45e33a18 (doc restruct)
+>>>>>>> 0eb223f1 (rename file)
               }
             }
           }
@@ -176,12 +205,21 @@
   "active": "39ab877557dee651",
   "lastOpenFiles": [
 <<<<<<< HEAD
+<<<<<<< HEAD
     "Pic/RoleDesign.png",
     "WisFormRoleDesign.md",
 =======
     "WisFormRoleDesign.md",
     "Pic/RoleDesign.png",
 >>>>>>> b36f1b2c (commit and get new)
+=======
+    "WisFormRoleDesign.md",
+    "Pic/RoleDesign.png",
+=======
+    "Pic/RoleDesign.png",
+    "WisFormRoleDesign.md",
+>>>>>>> 45e33a18 (doc restruct)
+>>>>>>> 0eb223f1 (rename file)
     "DatabaseDesign.md",
     "Pic/HierarchicalRBAC.png",
     "RBAC.png",
