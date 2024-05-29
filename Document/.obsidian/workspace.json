@@ -8,6 +8,7 @@
         "type": "tabs",
         "children": [
           {
+<<<<<<< HEAD
             "id": "891cd93611308852",
             "type": "leaf",
             "state": {
@@ -20,6 +21,8 @@
             }
           },
           {
+=======
+>>>>>>> b36f1b2c (commit and get new)
             "id": "39ab877557dee651",
             "type": "leaf",
             "state": {
@@ -97,7 +100,11 @@
             "state": {
               "type": "backlink",
               "state": {
+<<<<<<< HEAD
                 "file": "WisFormRoleDesign.md",
+=======
+                "file": "Minute/week13.md",
+>>>>>>> b36f1b2c (commit and get new)
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +121,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+<<<<<<< HEAD
                 "file": "WisFormRoleDesign.md",
+=======
+                "file": "Minute/week13.md",
+>>>>>>> b36f1b2c (commit and get new)
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +148,11 @@
             "state": {
               "type": "outline",
               "state": {
+<<<<<<< HEAD
                 "file": "WisFormRoleDesign.md"
+=======
+                "file": "Minute/week13.md"
+>>>>>>> b36f1b2c (commit and get new)
               }
             }
           }
@@ -158,10 +173,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "891cd93611308852",
+  "active": "39ab877557dee651",
   "lastOpenFiles": [
+<<<<<<< HEAD
     "Pic/RoleDesign.png",
     "WisFormRoleDesign.md",
+=======
+    "WisFormRoleDesign.md",
+    "Pic/RoleDesign.png",
+>>>>>>> b36f1b2c (commit and get new)
     "DatabaseDesign.md",
     "Pic/HierarchicalRBAC.png",
     "RBAC.png",
@@ -173,7 +193,6 @@
     "Hierarchical RBAC.png",
     "Pic",
     "RBACwithGeneralRoleHierarchy.png",
-    "RBACasForms.png",
     "MidRepo.md",
     "Minute/week13.md",
     "Minute/week14.md",
