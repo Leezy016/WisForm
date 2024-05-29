@@ -1,37 +1,14 @@
 {
   "main": {
-    "id": "f702864ef55f7547",
+    "id": "b6539a2da8f2ff67",
     "type": "split",
     "children": [
       {
-        "id": "9e45b15b47d51438",
+        "id": "ff23580348bd7f0d",
         "type": "tabs",
         "children": [
           {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 0eb223f1 (rename file)
-            "id": "891cd93611308852",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "WisFormRoleDesign.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-<<<<<<< HEAD
-=======
->>>>>>> b36f1b2c (commit and get new)
-=======
->>>>>>> 45e33a18 (doc restruct)
->>>>>>> 0eb223f1 (rename file)
-            "id": "39ab877557dee651",
+            "id": "9bafa1a3af7e5871",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -48,15 +25,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "6be07c4e803fefd3",
+    "id": "9250a47212022873",
     "type": "split",
     "children": [
       {
-        "id": "d688378b0f9706b7",
+        "id": "a9ef959378e5c0be",
         "type": "tabs",
         "children": [
           {
-            "id": "25f627ca006333a5",
+            "id": "2120f791d0bef764",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -66,7 +43,7 @@
             }
           },
           {
-            "id": "e2c246da7fb4d9a5",
+            "id": "2f3b258f062f44eb",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -81,7 +58,7 @@
             }
           },
           {
-            "id": "242d31520f6fcdd9",
+            "id": "d1a957785713b5f7",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -92,34 +69,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 209.5
+    "width": 300
   },
   "right": {
-    "id": "474cb60fb0f36052",
+    "id": "a393e79821561b0c",
     "type": "split",
     "children": [
       {
-        "id": "0078d9408cf31d00",
+        "id": "9227aaee95be4abb",
         "type": "tabs",
         "children": [
           {
-            "id": "4495d7e6e0e1036d",
+            "id": "e73355bdcc3a6493",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "file": "WisFormRoleDesign.md",
-=======
                 "file": "Minute/week13.md",
->>>>>>> b36f1b2c (commit and get new)
-=======
-                "file": "Minute/week13.md",
-=======
-                "file": "WisFormRoleDesign.md",
->>>>>>> 45e33a18 (doc restruct)
->>>>>>> 0eb223f1 (rename file)
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,30 +97,19 @@
             }
           },
           {
-            "id": "44935d9c000fac54",
+            "id": "5c345c22bed9ed80",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "file": "WisFormRoleDesign.md",
-=======
                 "file": "Minute/week13.md",
->>>>>>> b36f1b2c (commit and get new)
-=======
-                "file": "Minute/week13.md",
-=======
-                "file": "WisFormRoleDesign.md",
->>>>>>> 45e33a18 (doc restruct)
->>>>>>> 0eb223f1 (rename file)
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "a077eb5266b5d24b",
+            "id": "9780c4dc8129af77",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -165,23 +120,12 @@
             }
           },
           {
-            "id": "a90e60ba4083b08e",
+            "id": "c9f85f0fb787eb9b",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "file": "WisFormRoleDesign.md"
-=======
                 "file": "Minute/week13.md"
->>>>>>> b36f1b2c (commit and get new)
-=======
-                "file": "Minute/week13.md"
-=======
-                "file": "WisFormRoleDesign.md"
->>>>>>> 45e33a18 (doc restruct)
->>>>>>> 0eb223f1 (rename file)
               }
             }
           }
@@ -190,7 +134,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 236.5
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -202,50 +146,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "39ab877557dee651",
+  "active": "9bafa1a3af7e5871",
   "lastOpenFiles": [
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "Pic/RoleDesign.png",
-    "WisFormRoleDesign.md",
-=======
-    "WisFormRoleDesign.md",
-    "Pic/RoleDesign.png",
->>>>>>> b36f1b2c (commit and get new)
-=======
-    "WisFormRoleDesign.md",
-    "Pic/RoleDesign.png",
-=======
-    "Pic/RoleDesign.png",
-    "WisFormRoleDesign.md",
->>>>>>> 45e33a18 (doc restruct)
->>>>>>> 0eb223f1 (rename file)
-    "DatabaseDesign.md",
-    "Pic/HierarchicalRBAC.png",
-    "RBAC.png",
-    "Pic/WisFormLogo.png",
-    "Pic/roleHierarchy.png",
-    "Pic/RBACwithGeneralRoleHierarchy.png",
-    "Pic/RBACasForms.png",
-    "Pic/RBAC.png",
-    "Hierarchical RBAC.png",
-    "Pic",
-    "RBACwithGeneralRoleHierarchy.png",
-    "MidRepo.md",
-    "Minute/week13.md",
-    "Minute/week14.md",
-    "Deployment",
-    "database/Design.md",
     "Minute/week12.md",
-    "Minute/week11.md",
-    "Minute/week11.pdf",
-    "Minute/week13 - 副本.md",
-    "~$midRepo.pptx",
     "Requirement.md",
-    "Neo4j/usage/GraphAcademy.md",
-    "Neo4j/usage/Cypher.md",
-    "Neo4j/settings.md",
-    "Tasks.md",
-    "database"
+    "Minute/week13.md"
   ]
 }
