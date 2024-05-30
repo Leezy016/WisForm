@@ -5,7 +5,7 @@ import HomePage from '../components/HomePage.vue';
 import LoginPage from '../components/LoginPage.vue';
 import DataView from '../components/DataView.vue';
 import Registation from '../components/Registation.vue';
-import UserManagement from '../components/UserManagement.vue'; 
+import UserManagement from '../components/UserManagement.vue';
 import FormFill from '../components/FormFill.vue';
 import FormView from '../components/FormView.vue';
 import FormCreat from '../components/FormCreat.vue';
@@ -56,9 +56,10 @@ const routes = [
         component: Registation,
     },
     {
-        path: '/form-fill',
+        path: '/form-fill/:username/:role',
         name: 'FormFill',
         component: FormFill,
+        props: true
     },
     {
         path: '/form-view',
