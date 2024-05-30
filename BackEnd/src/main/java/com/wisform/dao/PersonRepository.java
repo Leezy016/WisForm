@@ -24,7 +24,11 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
     @Query("CREATE (p:Person {name: $name, identity: $identity, passwd: $passwd,department: $department}) RETURN p")
     Person saveUser(@Param("name") String name, @Param("identity") String identity, @Param("passwd") String passwd,@Param("department") List<String> department);
 
-    @Query("MATCH (n:roleControl) RETURN n[$a] AS value")
+    //@Query("MATCH (n:roleControl) RETURN n[$a] AS value")
+    //List<Object> getroleControl(@Param("a") String propertyName);
+
+    @Query("MATCH (n:roleControl) WITH n[$a] AS value UNWIND value AS flattenedValue RETURN flattenedValue")
     List<Object> getroleControl(@Param("a") String propertyName);
+
 
 }

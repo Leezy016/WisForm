@@ -56,7 +56,8 @@ const routes = [
         component: Registation,
     },
     {
-        path: '/form-fill/:username/:role',
+        //path: '/form-fill/:username/:role',
+        path: '/form-fill',
         name: 'FormFill',
         component: FormFill,
         props: true
