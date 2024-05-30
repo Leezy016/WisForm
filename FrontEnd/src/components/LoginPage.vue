@@ -23,6 +23,8 @@ export default {
     return {
       username: '',
       password: '',
+      department:[],
+      role:'',
       permissions:[],// 用户权限列表
       loginError: '' // 登录错误信息
     };
@@ -35,18 +37,11 @@ export default {
         password: this.password,
       })
       .then(response=>{
-        //console.log(response.data)
-        //处理后端响应
-        const permissionsString = response.data.permissions.join(',');
         if (response.data.success) {
-        this.$router.push({ 
-          name: 'FormFill', 
-          params: { 
-          username: this.username,
-          role: permissionsString // 将权限信息转换为字符串传递给组件
-          } 
-      });
-
+          this.$store.commit('SET_PERMISSIONS', response.data.permissions);
+          this.$store.commit('SET_DEPARTMENT', response.data.department);
+          this.$store.commit('SET_ROLE', response.data.role);
+          this.$router.push('/form-fill');
         }
        else {
         // 登录失败，显示错误信息
