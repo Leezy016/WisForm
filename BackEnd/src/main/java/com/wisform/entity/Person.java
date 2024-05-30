@@ -37,6 +37,7 @@ public class Person implements Serializable {
     public String getPasswd() {
         return this.passwd;
     }
+
     public String getIdentity() {
         return this.identity;
     }
