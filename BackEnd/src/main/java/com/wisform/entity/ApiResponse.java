@@ -7,11 +7,21 @@ public class ApiResponse {
     private boolean success;
     private String message;
     private List<Object> permissions;
+    private String role;
+    private List<String> department;
 
     public ApiResponse(boolean success, String message,List<Object> permissions) {
         this.success = success;
         this.message = message;
         this.permissions = permissions; // 确保不为 null
+    }
+
+    public ApiResponse(boolean success, String message,String role,List<Object> permissions,List<String> department) {
+        this.success = success;
+        this.message = message;
+        this.permissions = permissions;
+        this.role = role;
+        this.department = department;
     }
     public ApiResponse(boolean success, String message) {
         this.success = success;

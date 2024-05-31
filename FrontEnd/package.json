@@ -11,8 +11,10 @@
     "axios": "^1.6.8",
     "core-js": "^3.8.3",
     "vue": "^3.4.27",
+    "vue-persistedstate": "^1.2.5",
     "vue-router": "^4.3.2",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

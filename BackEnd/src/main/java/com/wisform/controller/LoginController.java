@@ -35,8 +35,11 @@ public class LoginController {
             if (optionalPerson.getPasswd().equals(password)) {
                 identity = optionalPerson.getIdentity();
                 List<Object> permissions = new ArrayList<>();
+                List<String> department = new ArrayList<>();
+                String role = optionalPerson.getIdentity();
                 permissions = personRepository.getroleControl(identity);
-                ApiResponse response = new ApiResponse(true, "登录成功",permissions);
+                department = optionalPerson.getDepartment();
+                ApiResponse response = new ApiResponse(true, "登录成功",role,permissions,department);
                 response.apiout();
                 return ResponseEntity.ok().body(response);
             }else

@@ -1,14 +1,12 @@
 <template>  
   <nav class = "sidebar">  
     <ul>  
-      <p>
-        Welcome,{{  }}
-      </p>
-      <!-- 使用 v-for 遍历 permissions 并根据权限显示不同的链接或文本 -->  
+      <!-- 使用 v-for 遍历 permissions 并根据权限显示不同的文本 -->  
       <li v-for="permission in permissions" :key="permission">  
-        <!-- 假设有一个 permissionMap 对象来映射权限ID到文本 -->  
-        <span v-if="permissionMap[permission]">{{ permissionMap[permission] }}</span>   
-      </li>  
+        <a v-if="textMap[permission]" :href="linkMap[permission]">  
+          {{ textMap[permission] }}  
+        </a>
+      </li> 
     </ul>  
   </nav>  
 </template>  
@@ -22,12 +20,20 @@ export default {
       return this.$store.state.permissions;  
     },  
     // 可选的 permissionMap 对象，用于将权限ID映射到文本 
-    permissionMap() {  
+    textMap() {  
       return {  
-        1: '查看表单',  
+        1: '查看表单',
         2: '创建表单',  
         3: '填写表单',
         4: '管理人员'
+      };  
+    },
+    linkMap() {  
+      return {  
+        1: '/form-view',
+        2: '/form-create',  
+        3: '/form-fill',
+        4: '/user-management'
       };  
     },  
   },  
