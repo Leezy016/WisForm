@@ -10,6 +10,8 @@ public class ApiResponse {
     private String role;
     private List<String> department;
 
+
+
     public ApiResponse(boolean success, String message,List<Object> permissions) {
         this.success = success;
         this.message = message;
@@ -29,6 +31,8 @@ public class ApiResponse {
         this.permissions = null;
     }
 
+
+
     public boolean isSuccess() {
         return success;
     }
@@ -40,6 +44,8 @@ public class ApiResponse {
     public String getMessage() {
         return message;
     }
+    public String getRole(){return role;}
+    public List<String> getDepartment(){return department;}
 
     public List<Object> getPermissions(){
         return permissions;
