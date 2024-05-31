@@ -7,6 +7,7 @@ import UserManagement from '../components/UserManagement.vue';
 import FormFill from '../components/FormFill.vue';
 import FormView from '../components/FormView.vue';
 import FormCreate from '../components/FormCreate.vue';
+import FormFillDetail from '../components/FormFillDetail.vue';
 
 const routes = [
     {
@@ -51,7 +52,12 @@ const routes = [
         path: '/form-create',
         name: 'FormCreate',
         component: FormCreate,
-    }
+    },
+    {
+        path: '/form-fill/detail/:title',
+        name: 'FormFillDetail',
+        component: FormFillDetail,
+    },
 ];
 
 const router = createRouter({
