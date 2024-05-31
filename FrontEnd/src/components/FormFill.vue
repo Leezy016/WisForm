@@ -1,16 +1,14 @@
 <template>
   <div class="form-fill">
-    <h2>Welcome!</h2>
       <NavBar/>
   </div>
 </template>
 
 <script>
   import NavBar from '../components/NavBar.vue';
-
   export default {
       components: {
-          NavBar
+          NavBar,
       }
   };
 </script>

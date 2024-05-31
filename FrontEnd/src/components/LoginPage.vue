@@ -41,6 +41,7 @@ export default {
           this.$store.commit('SET_PERMISSIONS', response.data.permissions);
           this.$store.commit('SET_DEPARTMENT', response.data.department);
           this.$store.commit('SET_ROLE', response.data.role);
+          this.$store.commit('SET_USERNAME', this.username);
           this.$router.push('/form-fill');
         }
        else {
