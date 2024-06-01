@@ -17,6 +17,8 @@ public interface FFormatRepository extends Neo4jRepository<FFormatRepository, Lo
     @Query("MATCH (p:FFormat) WHERE p.name = $name RETURN p")
     FFormat findByName(String name);
 
+    @Query("MATCH (n:FFormat {name: $name})UNWIND n.Item AS itemValue RETURN itemValue")
+    List<String> getItemByName(String name);
     @Query("MATCH (p:Person {name: $name}), (f:FFormat {name: $title})CREATE (p)-[:PUBLISH]->(f)")
     void Relate_Publish(String name,String title);
 }
