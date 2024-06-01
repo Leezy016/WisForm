@@ -30,12 +30,28 @@ public class FFormat {
 
     @Property
     private List<String> ItemType;
-    public FFormat(String name, String Publisher,List<String> Item,List<String> ItemType) {
+    public FFormat(List<String> Item,List<String> ItemType,String Publisher,String name ) {
         this.name = name;
         this.Publisher = Publisher;
         //this.LanchDate = LanchDate;
         this.Item = Item;
         this.ItemType = ItemType;
+    }
+    public FFormat(String name){
+        this.name = name;
+    }
+
+
+    public List<String>getItem(){
+        return Item;
+    }
+
+    public List<String>getItemType(){
+        return ItemType;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 
