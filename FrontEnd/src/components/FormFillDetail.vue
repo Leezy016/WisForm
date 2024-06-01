@@ -58,7 +58,7 @@
     },  
     submitForm() {  
       console.log(this.content);  
-      axios.post('http://localhost:8080/api/register', {
+      axios.post('http://localhost:8080/fillform-desplay', {
         item:this.item,
         content:this.content
       })  
