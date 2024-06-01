@@ -94,25 +94,29 @@
       },
       submitForm() {
         const { username } = this; 
-        axios.post('http://localhost:8080/api/register', {  
+        axios.post('http://localhost:8080/createform', {  
+          title:this.formTitle,
+          Publisher: username,
           Item: this.labelArray,  
           ItemType: this.typeArray,  
-          Publisher: username,
-          title:this.formTitle
         })  
         .then(response => {  
+          console.log('后端返回数据：', response.data); 
           if (response.data.success) { 
             console.log('表单创建成功'); 
             router.push('/form-create'); 
             alert('表单创建成功！');
           }
           else {  
+            console.log(response.data.message);
             this.errorMessage = response.data.message || '表单创建失败了，请稍后再试';  
+            alert(this.errorMessage);
           }
          })  
         .catch(error => {  
           if (error.response) {  
             // 后端返回的错误信息
+            console.log(error.response.data);
             this.errorMessage = error.response.data;   
           }
           else {
