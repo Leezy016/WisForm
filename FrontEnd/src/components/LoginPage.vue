@@ -34,7 +34,7 @@ export default {
       //发送表单数据给后端
        axios.post('http://localhost:8080/api/login', {
         username: this.username,
-        password: this.password,
+        password: this.password
       })
       .then(response=>{
         if (response.data.success) {
