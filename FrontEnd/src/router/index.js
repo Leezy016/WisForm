@@ -57,7 +57,8 @@ const routes = [
         path: '/form-fill/detail/:title',
         name: 'FormFillDetail',
         component: FormFillDetail,
-    },
+        props: true
+    }
 ];
 
 const router = createRouter({

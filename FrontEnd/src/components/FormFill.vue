@@ -21,13 +21,13 @@ import axios from 'axios';
 export default {  
   data() {  
     return {  
-      titles: ['titile1'],
+      titles: [],
       getErrorMessage:'' 
     };  
   },  
   components: {
-          NavBar,
-      },
+      NavBar,
+  },
   methods: {  
     getTitles() {   
       axios.post('http://localhost:8080/api/register', {  
