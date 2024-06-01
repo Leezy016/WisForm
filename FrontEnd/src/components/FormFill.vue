@@ -30,7 +30,7 @@ export default {
   },
   methods: {  
     getTitles() {   
-      axios.post('http://localhost:8080/api/register', {  
+      axios.post('http://localhost:8080/fillformlist', {  
         })  
         .then(response => {  
           if (response.data.success) { 
