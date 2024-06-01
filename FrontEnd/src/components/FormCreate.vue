@@ -103,7 +103,10 @@
         .then(response => {  
           console.log('后端返回数据：', response.data); 
           if (response.data.success) { 
-            console.log('表单创建成功'); 
+            //console.log('表单创建成功'); 
+            this.selectedFields=[{ id: 'field1', label: '字段1', type: 'text' }],
+            this.showForm=false,
+            this.formTitle='' 
             router.push('/form-create'); 
             alert('表单创建成功！');
           }
@@ -124,7 +127,7 @@
           }
         }); 
       },
-    },  
+    }, 
   };
   </script>
 

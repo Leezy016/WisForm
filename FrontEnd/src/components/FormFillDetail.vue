@@ -86,7 +86,7 @@
     }, 
     
     created() {  
-      //this.getItems(); 
+      this.getItems(); 
       this.content = Array(this.item.length).fill(''); 
     },
 
