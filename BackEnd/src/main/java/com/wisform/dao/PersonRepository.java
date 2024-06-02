@@ -29,6 +29,12 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
 
     @Query("MATCH (n:roleControl) WITH n[$a] AS value UNWIND value AS flattenedValue RETURN flattenedValue")
     List<Object> getroleControl(@Param("a") String propertyName);
+    //新 由名字查身份
+    @Query("MATCH (p:Person) WHERE p.name = $name RETURN p.identity")
+    String findIdentityByName(String name);
+    //新 由身份查人名
+    @Query("MATCH (p:Person) WHERE p.identity = $identity RETURN p.name")
+    List<String> findNameByIdentity(String identity);
 
 
 }
