@@ -6,6 +6,7 @@ import com.wisform.entity.ApiResponse;
 import com.wisform.entity.FFormat;
 import com.wisform.entity.FFormatForm;
 import com.wisform.entity.Person;
+import com.wisform.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import java.util.List;
 public class CreateFormController {
     @Autowired
     private FFormatRepository fFormatRepository;
+
     @PostMapping("/createform")
     public ResponseEntity<?> createform(@RequestBody FFormatForm form) {
         String name = form.getname();
@@ -34,7 +36,7 @@ public class CreateFormController {
             System.out.print("收集表已存在，请修改收集表名称");
             return ResponseEntity.ok().body(new ApiResponse(false, "收集表已存在，请修改收集表名称"));
         } else {
-            FFormat newfFormat = new FFormat(name,Publisher,Item,ItemType);
+            FFormat newfFormat = new FFormat(Item,ItemType,Publisher,name);
             fFormatRepository.saveFFormat(name,Publisher,Item,ItemType);
             fFormatRepository.Relate_Publish(Publisher,name);
             return ResponseEntity.ok(new ApiResponse(true, "创建收集表成功"));
