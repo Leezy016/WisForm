@@ -13,7 +13,7 @@
   
 <script>  
 export default {  
-  name: 'NavBar',  
+  name: 'NavBar', 
   computed: {  
     // 使用计算属性从 Vuex store 中获取 permissions  
     permissions() {  
@@ -23,20 +23,27 @@ export default {
     textMap() {  
       return {  
         1: '查看表单',
-        2: '创建表单',  
-        3: '填写表单',
-        4: '管理人员'
+        2: '- 我填写的',
+        3: '- 我发布的',
+        4: '- 我可查看',
+        5: '创建表单',  
+        6: '填写表单',
+        7: '管理人员'
       };  
     },
     linkMap() {  
       return {  
-        1: '/form-view',
-        2: '/form-create',  
-        3: '/form-fill',
-        4: '/user-management'
+        //1: '/form-view',
+        2: '/form-view/2',
+        3: '/form-view/1',
+        4: '/form-view/3',
+        5: '/form-create',  
+        6: '/form-fill',
+        7: '/user-management'
       };  
-    },  
-  },  
+    },    
+  },
+    
 };  
 </script>
 
