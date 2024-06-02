@@ -35,7 +35,7 @@
     methods:{
     getItems() {   
       axios.post('http://localhost:8080/api/register', {
-        title:this.title
+        title:this.title,
       })  
       .then(response => {  
         if (response.data.success) { 
@@ -65,18 +65,20 @@
       .then(response => {  
         if (response.data.success) { 
           //console.log('表单提交成功'); 
+          alert('表单提交成功！');
         }
         else {  
-          this.getErrorMessage = response.data.message || '表单提交失败，请稍后再试';  
+          this.submitErrorMessage = response.data.message || '表单提交失败，请稍后再试'; 
+          alert(this.submiterrorMessage); 
         }
       })  
       .catch(error => {  
         if (error.response) {  
           // 后端返回的错误信息
-          this.getErrorMessage = error.response.data;   
+          this.submitErrorMessage = error.response.data;   
         }
         else {
-          this.getErrorMessage = '表单提交失败，请稍后再试';
+          this.submitErrorMessage = '表单提交失败，请稍后再试';
         }
       });  
     },   

@@ -1,20 +1,79 @@
-<template>
-    <div class="form-fill"> 
-        <NavBar /> <!-- 引入并使用NavBar组件 -->  
-        <!-- 页面其他内容 -->  
-    </div>
-  </template>
+<template>  
+  <div class="form-view">  
+      <NavBar/>
+    <table class="table">  
+      <thead>  
+        <tr><th>请选择需要查看的表单</th></tr>  
+      </thead>  
+      <tbody>  
+        <tr v-for="(title,index) in titles" :key="index" @click="goToDetail(title)">  
+          <td>{{ title }}</td>  
+        </tr>  
+      </tbody>  
+    </table> 
+    <p v-if="getErrorMessage" class="errorMessage">{{ getErrorMessage }}</p> 
+  </div>  
+</template>
 
-  <script>
-
- import NavBar from './NavBar.vue'; 
-  export default {
-    components: {  
-    NavBar  
+<script>
+import NavBar from '../components/NavBar.vue'; 
+import axios from 'axios';
+export default {  
+  props: ['num'],
+  data() {  
+    return {  
+      titles: ['titile1'],
+      getErrorMessage:'' 
+    };  
+  },  
+  components: {
+      NavBar,
+  },
+  methods: {  
+    getTitles() {  
+      //console.log(this.num) ;
+      //console.log(this.$store.state.username);
+      axios.post('http://localhost:8080/viewform/select', {  
+        num:this.num,
+        name:this.$store.state.username
+        })  
+        .then(response => {  
+          if (response.data.success) {  
+            this.titles=response.data.Createlist
+          }
+          else {  
+            this.getErrorMessage = response.data.message || '表单列表获取失败，请稍后再试';  
+          }
+         })  
+        .catch(error => {  
+          if (error.response) {  
+            // 后端返回的错误信息
+            this.getErrorMessage = error.response.data;   
+          }
+          else {
+            this.getErrorMessage = '表单列表获取失败，请稍后再试';
+          }
+        });  
+    },  
+    goToDetail(title) {  
+      this.$router.push({ name: 'FormViewDetail', params: { title: title} });  
+    }  
+  },  
+  created() {  
+    this.getTitles(); // 在组件创建时获取数据  
+    console.log(this.titles);
   }  
-  };
-  </script>
+};  
+</script>
 
-<style scoped>
-
+<style>  
+.container {  
+  display: flex;  
+  flex-direction: row;  
+}  
+  
+.form-view{  
+  max-width: 400px;
+  margin: auto;
+}  
 </style>

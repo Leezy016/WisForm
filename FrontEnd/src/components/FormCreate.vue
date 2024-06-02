@@ -37,8 +37,9 @@
                     <label :for="field.id" class="field-label">{{ field.label }}</label>  <!-- 表单项标签 -->  
                 </td>    
                 <td>    
-                    <input :type="field.type" :id="field.id" v-model="formData[field.id]" class="field-input">  <!-- 表单项输入框，类型由field.type决定 -->  
+                  <p >  </p>
                 </td>    
+                
             </tr>    
         </table>    
         <button type="submit" class="submit-btn">提交</button>  <!-- 提交表单的按钮 -->  

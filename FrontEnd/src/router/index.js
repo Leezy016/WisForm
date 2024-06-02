@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../components/HomePage.vue';
 import LoginPage from '../components/LoginPage.vue';
-import DataView from '../components/DataView.vue';
 import Registation from '../components/Registation.vue';
 import UserManagement from '../components/UserManagement.vue';
 import FormFill from '../components/FormFill.vue';
 import FormView from '../components/FormView.vue';
 import FormCreate from '../components/FormCreate.vue';
 import FormFillDetail from '../components/FormFillDetail.vue';
+import FormViewDetail from '../components/FormViewDetail.vue';
 
 const routes = [
     {
@@ -19,11 +19,6 @@ const routes = [
         path: '/login',
         name: 'LoginPage',
         component: LoginPage,
-    },
-    {
-        path: '/data-view', // 修改路径为小写
-        name: 'DataView',
-        component: DataView, // 修改为正确的组件
     },
     {
         path: '/user-management', // 修改路径为小写
@@ -44,9 +39,10 @@ const routes = [
         component: FormFill,
     },
     {
-        path: '/form-view',
+        path: '/form-view/:num',
         name: 'FormView',
         component: FormView,
+        props: true
     },
     {
         path: '/form-create',
@@ -57,6 +53,12 @@ const routes = [
         path: '/form-fill/detail/:title',
         name: 'FormFillDetail',
         component: FormFillDetail,
+        props: true
+    },
+    {
+        path: '/form-view/detail/:title',
+        name: 'FormViewDetail',
+        component: FormViewDetail,
         props: true
     }
 ];
