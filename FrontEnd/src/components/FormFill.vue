@@ -6,8 +6,9 @@
         <tr><th>请选择需要填写的表单</th></tr>  
       </thead>  
       <tbody>  
-        <tr v-for="(title,index) in titles" :key="index" @click="goToDetail(title)">  
-          <td>{{ title }}</td>  
+        <tr v-for="(title,index) in titles" :key="index">  
+          <td>{{ title }}</td> 
+          <button type="fill" class="fill-btn" @click="goToDetail(title)">填写</button> 
         </tr>  
       </tbody>  
     </table> 

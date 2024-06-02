@@ -8,6 +8,7 @@
       <tbody>  
         <tr v-for="(title,index) in titles" :key="index" @click="goToDetail(title)">  
           <td>{{ title }}</td>  
+          <button type="view" class="view-btn" @click="goToDetail(title)">查看</button>
         </tr>  
       </tbody>  
     </table> 

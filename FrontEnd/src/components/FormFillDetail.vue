@@ -34,8 +34,8 @@
     },
     methods:{
     getItems() {   
-      axios.post('http://localhost:8080/api/register', {
-        title:this.title,
+      axios.post('http://localhost:8080/fillform-desplay', {
+        name:this.title,
       })  
       .then(response => {  
         if (response.data.success) { 
@@ -58,14 +58,17 @@
     },  
     submitForm() {  
       console.log(this.content);  
-      axios.post('http://localhost:8080/fillform-desplay', {
-        item:this.item,
-        content:this.content
+      axios.post('http://localhost:8080/fillform-recieve', {
+        title:this.title,
+        filler:this.$store.state.username,
+        Item:this.item,
+        ItemValue:this.content
       })  
       .then(response => {  
         if (response.data.success) { 
           //console.log('表单提交成功'); 
           alert('表单提交成功！');
+          this.$router.push('/form-fill');
         }
         else {  
           this.submitErrorMessage = response.data.message || '表单提交失败，请稍后再试'; 
