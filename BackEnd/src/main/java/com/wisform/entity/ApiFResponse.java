@@ -27,11 +27,12 @@ public class ApiFResponse {
         this.Item = Item;
     }
 
-    public ApiFResponse(boolean success, String message,List<String> item, List<String> itemValue) {
+    public ApiFResponse(boolean success, String message,List<String> Item, List<String> ItemValue) {
         this.success=success;
         this.message=message;
-        this.Item = item;
-        this.ItemValue = itemValue;
+        this.Item = Item;
+        this.ItemValue = ItemValue;
+
     }
     public boolean isSuccess() {
         return success;

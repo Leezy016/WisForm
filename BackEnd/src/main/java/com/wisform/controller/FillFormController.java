@@ -41,7 +41,7 @@ public class FillFormController {
         //System.out.print(title);
         //FFormat ffFormat = fFormatRepository.findByName("论文采集表A");
         Item = fFormatRepository.getItemByName(title);
-        //System.out.print(Item);
+        System.out.print(Item);
         //System.out.print(Item.size());
         if(Item!= null){
             ApiFResponse response = new ApiFResponse(Item,true,"获取表单成功");
