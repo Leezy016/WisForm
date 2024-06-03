@@ -9,7 +9,7 @@
                   <label>{{ itemName }}</label> 
                 </td>
                 <td>
-                  <lable>{{ content[index] }}</lable> 
+                  <label>{{ content[index] }}</label> 
                 </td>        
             </tr>    
         </table>    
@@ -38,10 +38,10 @@ export default {
     return {  
       sum:[],//id列表
       nums: [],
-      curNum: 5,//当前页数默认1
+      curNum: 1,//当前页数默认1
 
-      item: ['item1','item2'],
-      content:['1','2'],
+      item: [],
+      content:[],
       getcErrorMessage:'',
       getsErrorMessage:'', 
     };  
@@ -77,11 +77,11 @@ export default {
         //当前页码减去开始页码得到差
         let interval = this.curNum - start;
         //最多7个页码，总页码减去interval 得到end要显示的数量+
-        let end = (7 - interval) < this.sum ? (7 - interval) : this.sum;
+        let end = (7 - interval) < this.sum.length ? (7 - interval) : this.sum.length;
         //最末页码减开始页码小于8
         if ((end - start) != 6) {
           //最末页码加上与不足7页的数量，数量不得大于总页数
-          end = end + (6 - (end - start)) < this.sum ? end + (6 - (end - start)) : this.sum;
+          end = end + (6 - (end - start)) < this.sum.length ? end + (6 - (end - start)) : this.sum.length;
           //最末页码加上但是还不够7页，进行开始页码追加，开始页码不得小于1
           if ((end - start) != 6) {
             start = (end - 6) > 1 ? (end - 6) : 1;
@@ -97,7 +97,9 @@ export default {
   })  
   .then(response => {  
     if (response.data.success) {  
-      this.sum=response.data.titles
+      this.sum=response.data.titles;
+      this.pagers();
+      this.getContent(this.sum[0]);
     }
     else {  
       this.getsErrorMessage = response.data.message || '表单获取失败，请稍后再试';  
@@ -114,13 +116,16 @@ export default {
   }); 
 },
 getContent(id){
+  //console.log(id),
   axios.post('http://localhost:8080/viewform/getContent', {  
     num:id,
+    title:this.title
   })  
   .then(response => {  
     if (response.data.success) {  
-      this.item=response.data.Itemlist,
-      this.content=response.data.ValueList
+      console.log("success"),
+      this.item=response.data.item,
+      this.content=response.data.itemValue
     }
     else {  
       this.getcErrorMessage = response.data.message || '表单获取失败，请稍后再试';  
@@ -139,8 +144,6 @@ getContent(id){
   },
   created() {  
     this.getSum();
-    this.getContent(0); 
-    this.pagers();
   }, 
 };
 </script>

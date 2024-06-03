@@ -39,7 +39,6 @@
                 <td>    
                   <p >  </p>
                 </td>    
-                
             </tr>    
         </table>    
         <button type="submit" class="submit-btn">提交</button>  <!-- 提交表单的按钮 -->  
@@ -102,9 +101,8 @@
           ItemType: this.typeArray,  
         })  
         .then(response => {  
-          console.log('后端返回数据：', response.data); 
+          //console.log('后端返回数据：', response.data); 
           if (response.data.success) { 
-            //console.log('表单创建成功'); 
             this.selectedFields=[{ id: 'field1', label: '字段1', type: 'text' }],
             this.showForm=false,
             this.formTitle='' 
@@ -112,7 +110,7 @@
             alert('表单创建成功！');
           }
           else {  
-            console.log(response.data.message);
+            //console.log(response.data.message);
             this.errorMessage = response.data.message || '表单创建失败了，请稍后再试';  
             alert(this.errorMessage);
           }
@@ -120,7 +118,7 @@
         .catch(error => {  
           if (error.response) {  
             // 后端返回的错误信息
-            console.log(error.response.data);
+            //console.log(error.response.data);
             this.errorMessage = error.response.data;   
           }
           else {
@@ -172,6 +170,7 @@
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 10px;
+  
 }
 
 .form {
