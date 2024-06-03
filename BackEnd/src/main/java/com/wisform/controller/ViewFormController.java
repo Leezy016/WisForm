@@ -29,8 +29,8 @@ public class ViewFormController {
     public ResponseEntity<?> select(@RequestBody Map<String, Object> requestBody) {//不知道和前端对不对应
         String num = (String) requestBody.get("num");
         String name = (String) requestBody.get("name");
-        System.out.print(num);
-        System.out.print(name);
+        //System.out.print(num);
+        //System.out.print(name);
         if (num.equals("1")) {//发布的
             List<String> Createlist = new ArrayList<>();
             Createlist = fFormatRepository.findFormatsByPublisherName(name);
@@ -78,18 +78,21 @@ public class ViewFormController {
     //加 f返回num getContent getSum
     //
     @PostMapping("/getContent")
-    public ResponseEntity<?> select12(@RequestBody Map<String, Object> requestBody) {
-        String formatname = (String) requestBody.get("formatnum");
+    public ResponseEntity<?> getContent(@RequestBody Map<String, Object> requestBody) {
         String numm = (String) requestBody.get("num");
-        int num =Integer.parseInt(numm);
-        List<String> Answerlist = new ArrayList<>();
-        Answerlist = answerRepository.findAnswersByFormatname(formatname);
+        String title = (String) requestBody.get("title");
+        System.out.print(numm);
+        long num = Long.parseLong(numm);
         List<String> Itemlist = new ArrayList<>();
-        Itemlist = answerRepository.findItemById(Answerlist.get(num));
+        Itemlist = answerRepository.findItemById(num,title);
         List<String> Valuelist = new ArrayList<>();
-        Valuelist = answerRepository.findValueById(Answerlist.get(num));
-        ApiFResponse response = new ApiFResponse(true,"获取回答成功",Itemlist, Valuelist);//true mess
-        return ResponseEntity.ok(response);
+        Valuelist = answerRepository.findValueById(num,title);
+        if(Itemlist!= null){
+            ApiFResponse response = new ApiFResponse(true,"获取回答成功",Itemlist, Valuelist);
+            return ResponseEntity.ok().body(response);
+        }else{
+            return ResponseEntity.ok().body(new ApiFResponse(false,"获取表单失败!"));
+        }
     }
 
 
