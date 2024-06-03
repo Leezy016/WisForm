@@ -21,4 +21,14 @@ public interface FFormatRepository extends Neo4jRepository<FFormatRepository, Lo
     List<String> getItemByName(String name);
     @Query("MATCH (p:Person {name: $name}), (f:FFormat {name: $title})MERGE (p)-[:PUBLISH]->(f)")
     void Relate_Publish(String name,String title);
+
+    //新增
+    @Query("MATCH (p:Person {name: $name})-[:PUBLISH]->(f:FFormat) RETURN f.name AS formatName")
+    List<String> findFormatsByPublisherName(@Param("name") String name);
+    //新增
+    @Query("MATCH (p:FFormat) RETURN p.name AS name")
+    List<String> findAllNames();
+    //xin 由人名查找填过的问卷,FILLFORM
+    @Query("MATCH (p:Person {name: $name})-[:CONTRIBUTE]->(f:FFormat) RETURN f.name AS FFormatName")
+    List<String> findFormatByPersonName(@Param("name") String name);
 }

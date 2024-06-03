@@ -41,6 +41,8 @@ public class FFormat {
         this.name = name;
     }
 
+    public FFormat(){}
+
 
     public List<String>getItem(){
         return Item;
