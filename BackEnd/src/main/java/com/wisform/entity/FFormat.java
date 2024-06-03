@@ -43,6 +43,8 @@ public class FFormat {
     public FFormat(){
     }
 
+    public FFormat(){}
+
 
     public List<String>getItem(){
         return Item;

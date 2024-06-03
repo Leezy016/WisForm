@@ -7,7 +7,15 @@ public class ApiFResponse {
     private String message;
     private List<String> titles;
     private List<String> Item;
-    private List<String> ItemType;
+    private List<String> ItemValue;
+
+    private int num;
+
+    public ApiFResponse(boolean success, String message,int num){
+        this.num = num;
+        this.success = success;
+        this.message = message;
+    }
     public ApiFResponse(boolean success, String message,List<String> formlist){
         this.titles = formlist;
         this.success = success;
@@ -17,6 +25,13 @@ public class ApiFResponse {
         this.success = success;
         this.message = message;
         this.Item = Item;
+    }
+
+    public ApiFResponse(boolean success, String message,List<String> item, List<String> itemValue) {
+        this.success=success;
+        this.message=message;
+        this.Item = item;
+        this.ItemValue = itemValue;
     }
     public boolean isSuccess() {
         return success;
@@ -28,6 +43,9 @@ public class ApiFResponse {
 
     public String getMessage() {
         return message;
+    }
+    public List<String> getItemValue(){
+        return ItemValue;
     }
 
     public List<String> getTitles() {

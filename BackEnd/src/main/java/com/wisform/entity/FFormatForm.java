@@ -14,7 +14,6 @@ public class FFormatForm {
     public FFormatForm(String title, String Publisher, List<String> Item,List<String> ItemType) {
         this.title = title;
         this.Publisher = Publisher;
-        //this.LanchDate = LanchDate;
         this.Item = Item;
         this.ItemType = ItemType;
     }
