@@ -10,6 +10,29 @@
         <label for="formTitle">表单标题：</label>    
         <input type="text" id="formTitle" v-model="formTitle" placeholder="请输入表单标题">  <!-- 绑定到Vue实例的formTitle属性 -->  
     </div>   
+
+    <div>  
+    <label for="myCheckbox">  
+      <input type="checkbox" id="myCheckbox" v-model="only" />  
+      填表人只能填写自己的信息  
+    </label>  
+  </div> 
+
+  <div>  
+    <p>请选择可以填写表单的用户类型</p>
+    <label for="myCheckbox">  
+      <input type="checkbox" id="myCheckbox" v-model="roleList[0]" />  
+      院长  
+    </label> 
+    <label for="myCheckbox">  
+      <input type="checkbox" id="myCheckbox" v-model="roleList[1]" />  
+      系主任 
+    </label>  
+    <label for="myCheckbox">  
+      <input type="checkbox" id="myCheckbox" v-model="roleList[2]" />  
+      老师 
+    </label> 
+  </div> 
   
     <!-- 循环渲染已选择的表单项 -->  
     <div v-for="(field, index) in selectedFields" :key="index" class="form-item">  
@@ -60,7 +83,9 @@
       return {
         selectedFields: [{ id: 'field1', label: '字段1', type: 'text' }],
         showForm: false,
-        formTitle:''
+        formTitle:'',
+        only: 0 ,// 默认不选中 
+        roleList:[0,0,0]
       };
     }, 
     computed: {  
@@ -94,11 +119,15 @@
       },
       submitForm() {
         const { username } = this; 
+        console.log(this.only);
+        console.log(this.roleList);
         axios.post('http://localhost:8080/createform', {  
           title:this.formTitle,
           Publisher: username,
           Item: this.labelArray,  
           ItemType: this.typeArray,  
+          only:this.only,
+          roleList:this.roleList
         })  
         .then(response => {  
           //console.log('后端返回数据：', response.data); 
@@ -145,6 +174,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  margin-top:20px;
 }
 
 .field-input {
