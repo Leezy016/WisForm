@@ -1,19 +1,22 @@
 <template>
   <div class="form-view-detail"> 
     <NavBar /> 
-    <form v-if="item"  class="form-table">    
+    <form v-if="this.$store.state.item"  class="form-table">    
         <table>    
             <!-- 循环渲染已选择的表单项为表格形式 -->  
-            <tr v-for="(itemName, index) in item" :key="index">    
+            <tr v-for="(itemName, index) in this.$store.state.item" :key="index">    
                 <td>    
                   <label>{{ itemName }}</label> 
                 </td>
                 <td>
-                  <label>{{ content[index] }}</label> 
+                  <label>{{ this.$store.state.content[index] }}</label> 
                 </td>        
             </tr>    
         </table>    
-    </form>  
+    </form> 
+    <div>
+      <button v-if="changeable" type="view" class="view-btn" @click="goToChange()">修改</button>
+    </div> 
 
     <div class="pageination" v-if="sum">
       <div @click="pageUp(0)" class="pagination_page">首页</div>
@@ -40,16 +43,18 @@ export default {
       nums: [],
       curNum: 1,//当前页数默认1
 
-      item: [],
-      content:[],
       getcErrorMessage:'',
       getsErrorMessage:'', 
+      changeable:1,
     };  
   }, 
   components: {  
     NavBar,  
   } ,
   methods:{
+    goToChange() {  
+      this.$router.push({ name: 'FormChange', params: { id: this.sum[this.curNum - 1]} });  
+    } ,
     pageUp(state){
       if (this.curNum - 1 != 0 && state == 1) {
         this.jump(this.curNum - 1);
@@ -67,7 +72,7 @@ export default {
     jump(num){
         this.curNum = num;
         this.pagers();
-        this.getContent(this.sum[num-1]);
+        this.getContent(this.sum[num]);
       },//跳转页码
     pagers(){
         //重置
@@ -119,13 +124,14 @@ getContent(id){
   //console.log(id),
   axios.post('http://localhost:8080/viewform/getContent', {  
     num:id,
-    title:this.title
+    title:this.title,
   })  
   .then(response => {  
     if (response.data.success) {  
-      console.log("success"),
-      this.item=response.data.item,
-      this.content=response.data.itemValue
+      //console.log("success"),
+      this.$store.commit('SET_ITEM', response.data.item),
+      this.$store.commit('SET_CONTENT', response.data.itemValue)
+      //changeable:
     }
     else {  
       this.getcErrorMessage = response.data.message || '表单获取失败，请稍后再试';  

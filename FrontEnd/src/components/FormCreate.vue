@@ -1,4 +1,3 @@
-
 <template>
   <div> 
     <NavBar/> <!-- 引入并使用NavBar组件 --> 
@@ -9,7 +8,14 @@
     <div class="form-title-input">    
         <label for="formTitle">表单标题：</label>    
         <input type="text" id="formTitle" v-model="formTitle" placeholder="请输入表单标题">  <!-- 绑定到Vue实例的formTitle属性 -->  
-    </div>   
+    </div>
+
+    <!-- <div>
+      <h4>基于Vue.2X的日期选择器</h4>
+        <div style="width: 502px;">
+          <DatePicker v-on:picked="picked"></DatePicker>
+        </div>
+    </div> -->
 
     <div>  
     <label for="myCheckbox">  
@@ -74,10 +80,14 @@
   import { mapGetters } from 'vuex';
   import axios from 'axios';
   import router from '../router';
+  import dayjs from 'dayjs';
+  //import DatePicker from './DatePicker.vue';
+  
   export default {
     name: 'FormCreate',
     components: {  
       NavBar
+      //DatePicker
     } ,
     data() {
       return {
@@ -85,7 +95,10 @@
         showForm: false,
         formTitle:'',
         only: 0 ,// 默认不选中 
-        roleList:[0,0,0]
+        roleList:[0,0,0],
+        ddl:"",//2024-06-11
+        minDate: dayjs(new Date()),
+        maxDate: dayjs(new Date()).add(20, 'day'),
       };
     }, 
     computed: {  
@@ -102,6 +115,9 @@
       ])     
     },
     methods: {
+      picked(year, month, date) {
+				console.warn(`你选择了${year}年${month}月${date}日`)
+			},
       addField() {
         const id = `field${this.selectedFields.length + 1}`;
         this.selectedFields.push({ id, label: `字段${this.selectedFields.length + 1}`, type: 'text' });
@@ -120,14 +136,15 @@
       submitForm() {
         const { username } = this; 
         console.log(this.only);
-        console.log(this.roleList);
+        console.log(this.ddl);
         axios.post('http://localhost:8080/createform', {  
           title:this.formTitle,
           Publisher: username,
           Item: this.labelArray,  
           ItemType: this.typeArray,  
           only:this.only,
-          roleList:this.roleList
+          roleList:this.roleList,
+          ddl:this.ddl
         })  
         .then(response => {  
           //console.log('后端返回数据：', response.data); 
@@ -225,4 +242,16 @@
   width: 100%; /* 输入字段占满单元格宽度 */  
   box-sizing: border-box; /* 包含内边距和边框 */  
 }  
+.demo-5{
+      padding: 10px;
+      background: #fff;
+      .btn{
+        margin-right: 20px;
+      }
+      .note{
+        font-size: 14px;
+        padding: 10px 0;
+        color: red;
+      }
+    }
 </style>
