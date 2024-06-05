@@ -32,6 +32,7 @@ export default {
   methods: {  
     getTitles() {   
       axios.post('http://localhost:8080/fillformlist', {  
+        username:this.$store.state.username
         })  
         .then(response => {  
           if (response.data.success) { 
