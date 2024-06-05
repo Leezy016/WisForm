@@ -7,14 +7,19 @@
     <!-- 动态表单标题输入 -->  
     <div class="form-title-input">    
         <label for="formTitle">表单标题：</label>    
-        <input type="text" id="formTitle" v-model="formTitle" placeholder="请输入表单标题">  <!-- 绑定到Vue实例的formTitle属性 -->  
+        <input type="text" id="formTitle" v-model="formTitle" placeholder="请输入表单标题">  
+    </div>
+
+    <div class="form-title-input">   
+      <label for="formTitle">截止日期：</label>    
+        <input type="text" id="formTitle" v-model="ddl" placeholder="请按yyyy-mm-dd输入"> 
     </div>
 
     <!-- <div>
-      <h4>基于Vue.2X的日期选择器</h4>
-        <div style="width: 502px;">
-          <DatePicker v-on:picked="picked"></DatePicker>
-        </div>
+      <p>截止日期</p>
+      <div>
+        <DatePicker v-on:picked="picked"></DatePicker>
+      </div>
     </div> -->
 
     <div>  
@@ -80,7 +85,6 @@
   import { mapGetters } from 'vuex';
   import axios from 'axios';
   import router from '../router';
-  import dayjs from 'dayjs';
   //import DatePicker from './DatePicker.vue';
   
   export default {
@@ -97,8 +101,6 @@
         only: 0 ,// 默认不选中 
         roleList:[0,0,0],
         ddl:"",//2024-06-11
-        minDate: dayjs(new Date()),
-        maxDate: dayjs(new Date()).add(20, 'day'),
       };
     }, 
     computed: {  
@@ -150,8 +152,11 @@
           //console.log('后端返回数据：', response.data); 
           if (response.data.success) { 
             this.selectedFields=[{ id: 'field1', label: '字段1', type: 'text' }],
-            this.showForm=false,
-            this.formTitle='' 
+            this.showForm= false,
+            this.formTitle='',
+            this.only= 0 ,
+            this.roleList=[0,0,0],
+            this.ddl="",
             router.push('/form-create'); 
             alert('表单创建成功！');
           }
