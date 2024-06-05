@@ -10,12 +10,21 @@ public class FFormatForm {
     private List<String> Item;
     private List<String> ItemType;
 
+    private List<String>roleList;
 
-    public FFormatForm(String title, String Publisher, List<String> Item,List<String> ItemType) {
+    private boolean only;
+
+    private  String  ddl;
+
+
+    public FFormatForm(String title, String Publisher, List<String> Item,List<String> ItemType,List<String>roelList,boolean only,String ddl) {
         this.title = title;
         this.Publisher = Publisher;
         this.Item = Item;
         this.ItemType = ItemType;
+        this.ddl = ddl;
+        this.roleList = roleList;
+        this.only = only;
     }
     public String getname() {
         return title;
@@ -34,5 +43,14 @@ public class FFormatForm {
     public List<String> getItemType(){
         return ItemType;
     }
+
+    public String getDDl() {
+        return ddl;
+    }
+
+    public List<String> getRoleList() { return roleList; }
+
+    public boolean getOnly() { return only; }
+
 }
 

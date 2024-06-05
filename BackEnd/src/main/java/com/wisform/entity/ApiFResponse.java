@@ -9,6 +9,8 @@ public class ApiFResponse {
     private List<String> Item;
     private List<String> ItemValue;
 
+    private boolean changeable;
+
     private int num;
 
     public ApiFResponse(boolean success, String message,int num){
@@ -27,12 +29,12 @@ public class ApiFResponse {
         this.Item = Item;
     }
 
-    public ApiFResponse(boolean success, String message,List<String> Item, List<String> ItemValue) {
+    public ApiFResponse(boolean success, String message,List<String> item, List<String> itemValue,boolean changeable) {
         this.success=success;
         this.message=message;
-        this.Item = Item;
-        this.ItemValue = ItemValue;
-
+        this.Item = item;
+        this.ItemValue = itemValue;
+        this.changeable = changeable;
     }
     public boolean isSuccess() {
         return success;
@@ -62,4 +64,7 @@ public class ApiFResponse {
         this.message = message;
     }
 
+    public boolean getChangeable() {
+        return changeable;
+    }
 }
