@@ -1,47 +1,75 @@
-<template>
-    <div class="form-fill"> 
-      <div class="sidebar">
-      <ul>
-        <li v-if="roleArray.includes('1')"  @click="navigate('FormView')">查看表格</li>
-        <li v-if="roleArray.includes('2')" @click="navigate('FormCreate')">创建表格</li>
-        <li v-if="roleArray.includes('3')" @click="navigate('FillForm')">填写表格</li>
-        <li v-if="roleArray.includes('4')" @click="navigate('UserManagement')">增删人员</li>
-      </ul>
-    </div> 
-    <!-- 主内容区域 -->
-    <div class="main-content">
-      <h2>Welcome, {{ username }}!</h2>
-      <router-view></router-view>
-    </div>
-    </div>
-  </template>
+<template>  
+  <div class="form-fill">  
+    <NavBar/>
+    <table class="table">  
+      <thead>  
+        <tr><th>请选择需要填写的表单</th></tr>  
+      </thead>  
+      <tbody>  
+        <tr v-for="(title,index) in titles" :key="index">  
+          <td>{{ title }}</td> 
+          <button type="fill" class="fill-btn" @click="goToDetail(title)">填写</button> 
+        </tr>  
+      </tbody>  
+    </table> 
+    <p v-if="getErrorMessage" class="errorMessage">{{ getErrorMessage }}</p> 
+  </div>  
+</template>
 
-  <script>
-  export default {
-    name:"FormFill",
-    props:{
-      username:{
-        type:String,
-        required:true
-      },
-      role:{
-        type:String,
-        required:true
-      }
-    },
-    computed: {
-    roleArray() {
-      return this.role.split(',');
-      }
-    },
-    methods: {
-      navigate(routeName) {
-        this.$router.push({ name: routeName });
-      }
-    },
+<script>
+import NavBar from '../components/NavBar.vue'; 
+import axios from 'axios';
+export default {  
+  data() {  
+    return {  
+      titles: [],
+      getErrorMessage:'' 
+    };  
+  },  
+  components: {
+      NavBar,
+  },
+  methods: {  
+    getTitles() {   
+      axios.post('http://localhost:8080/fillformlist', {  
+        })  
+        .then(response => {  
+          if (response.data.success) { 
+            //console.log('表单提交成功'); 
+            this.titles=response.data.titles
+          }
+          else {  
+            this.getErrorMessage = response.data.message || '表单列表获取失败，请稍后再试';  
+          }
+         })  
+        .catch(error => {  
+          if (error.response) {  
+            // 后端返回的错误信息
+            this.getErrorMessage = error.response.data;   
+          }
+          else {
+            this.getErrorMessage = '表单提交失败，请稍后再试';
+          }
+        });  
+    },  
+    goToDetail(title) {  
+      this.$router.push({ name: 'FormFillDetail', params: { title: title} });  
+    }  
+  },  
+  created() {  
+    this.getTitles(); // 在组件创建时获取数据  
   }  
-  </script>
+};  
+</script>
 
-<style scoped>
-
+<style>  
+.container {  
+  display: flex;  
+  flex-direction: row;  
+}  
+  
+.form-fill{  
+  max-width: 400px;
+  margin: auto;
+}  
 </style>

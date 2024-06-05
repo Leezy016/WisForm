@@ -23,6 +23,8 @@ export default {
     return {
       username: '',
       password: '',
+      department:[],
+      role:'',
       permissions:[],// 用户权限列表
       loginError: '' // 登录错误信息
     };
@@ -32,21 +34,15 @@ export default {
       //发送表单数据给后端
        axios.post('http://localhost:8080/api/login', {
         username: this.username,
-        password: this.password,
+        password: this.password
       })
       .then(response=>{
-        //console.log(response.data)
-        //处理后端响应
-        const permissionsString = response.data.permissions.join(',');
         if (response.data.success) {
-        this.$router.push({ 
-          name: 'FormFill', 
-          params: { 
-          username: this.username,
-          role: permissionsString // 将权限信息转换为字符串传递给组件
-          } 
-      });
-
+          this.$store.commit('SET_PERMISSIONS', response.data.permissions);
+          this.$store.commit('SET_DEPARTMENT', response.data.department);
+          this.$store.commit('SET_ROLE', response.data.role);
+          this.$store.commit('SET_USERNAME', this.username);
+          this.$router.push('/form-fill');
         }
        else {
         // 登录失败，显示错误信息

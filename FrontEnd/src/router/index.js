@@ -1,14 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import AdminDashboard from '../components/AdminDashboard.vue';
-import UserDashboard from '../components/UserDashboard.vue';
 import HomePage from '../components/HomePage.vue';
 import LoginPage from '../components/LoginPage.vue';
-import DataView from '../components/DataView.vue';
 import Registation from '../components/Registation.vue';
 import UserManagement from '../components/UserManagement.vue';
 import FormFill from '../components/FormFill.vue';
 import FormView from '../components/FormView.vue';
-import FormCreat from '../components/FormCreat.vue';
+import FormCreate from '../components/FormCreate.vue';
+import FormFillDetail from '../components/FormFillDetail.vue';
+import FormViewDetail from '../components/FormViewDetail.vue';
 
 const routes = [
     {
@@ -17,30 +16,9 @@ const routes = [
         component: HomePage,
     },
     {
-        path: '/admin',
-        name: 'AdminDashboard',
-        component: AdminDashboard,
-        meta: {
-            requiresAuth: true,
-        },
-    },
-    {
         path: '/login',
         name: 'LoginPage',
         component: LoginPage,
-    },
-    {
-        path: '/user',
-        name: 'UserDashboard',
-        component: UserDashboard,
-        meta: {
-            requiresAuth: true,
-        },
-    },
-    {
-        path: '/data-view', // 修改路径为小写
-        name: 'DataView',
-        component: DataView, // 修改为正确的组件
     },
     {
         path: '/user-management', // 修改路径为小写
@@ -56,20 +34,32 @@ const routes = [
         component: Registation,
     },
     {
-        path: '/form-fill/:username/:role',
+        path: '/form-fill',
         name: 'FormFill',
         component: FormFill,
+    },
+    {
+        path: '/form-view/:num',
+        name: 'FormView',
+        component: FormView,
         props: true
     },
     {
-        path: '/form-view',
-        name: 'FormView',
-        component: FormView,
+        path: '/form-create',
+        name: 'FormCreate',
+        component: FormCreate,
     },
     {
-        path: '/form-creat',
-        name: 'FormCreat',
-        component: FormCreat,
+        path: '/form-fill/detail/:title',
+        name: 'FormFillDetail',
+        component: FormFillDetail,
+        props: true
+    },
+    {
+        path: '/form-view/detail/:title',
+        name: 'FormViewDetail',
+        component: FormViewDetail,
+        props: true
     }
 ];
 
