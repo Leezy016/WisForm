@@ -34,7 +34,7 @@
     methods:{
     submitForm() {  
       console.log(this.content);  
-      axios.post('http://localhost:8080/formchange', {
+      axios.post('http://localhost:8080/viewform/form-change', {
         id:this.id,
         Item:this.item,
         ItemValue:this.content
