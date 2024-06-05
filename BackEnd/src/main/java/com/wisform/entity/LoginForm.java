@@ -14,6 +14,10 @@ public class LoginForm {
         this.password = password;
     }
 
+    public LoginForm(String username) {
+        this.username = username;
+    }
+
     public String getUsername() {
         return username;
     }

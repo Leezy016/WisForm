@@ -2,6 +2,7 @@ package com.wisform.controller;
 
 import com.wisform.dao.FFormatRepository;
 import com.wisform.dao.FillFormRepository;
+import com.wisform.dao.PersonRepository;
 import com.wisform.entity.*;
 import com.wisform.service.AnswerService;
 import org.apache.commons.lang3.ObjectUtils;
@@ -17,22 +18,27 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class FillFormController {
-    private AtomicLong globalId = new AtomicLong(1); // 初始值为 1
     @Autowired
     private FillFormRepository fillFormRepository;
+    @Autowired
+    private PersonRepository personRepository;
     @Autowired
     private AnswerService answerService;
     @Autowired
     private FFormatRepository fFormatRepository;
     @PostMapping("/fillformlist")
-    public ResponseEntity<?> formlist() {
+    public ResponseEntity<?> formlist(@RequestBody LoginForm loginForm) {//改
+        String name = loginForm.getUsername();
+        String role = personRepository.findIdentityByName(name);
+        //System.out.print(role);
         List<String> formlist = new ArrayList<>();
-        formlist = fillFormRepository.formlist();
-        System.out.print(formlist);
+        formlist = fillFormRepository.findFFormatByRole(role);
+        //System.out.print(formlist);
         ApiFResponse response = new ApiFResponse(true,"获取表单列表成功",formlist);
 
         return ResponseEntity.ok().body(response);
     }
+
     @PostMapping("/fillform-desplay")
     public ResponseEntity<?> formdesplay(@RequestBody FFormat fFormat) {
         String title = fFormat.getName();
@@ -51,7 +57,6 @@ public class FillFormController {
         }
 
     }
-
     //@PostMapping("/anto-fill")
     //public ResponseEntity<?> autofill() {
         //ApiFResponse response = new ApiFResponse();
@@ -62,8 +67,15 @@ public class FillFormController {
         String title = answerForm.getTitle();
         String filler = answerForm.getFiller();
         List<String> item = answerForm.getItem();
+        //System.out.print(answerForm.getItem());
         List<String> itemvalue = answerForm.getValue();
-        Answer answer = new Answer(globalId.getAndIncrement(),item,itemvalue);
+        Long id = fillFormRepository.global_id();
+        if(id!=null){
+            id = id+1;
+        }else{
+            id=0L;
+        }
+        Answer answer = new Answer(id,item,itemvalue);
         if(answerService.AnswerNode(answer,item,itemvalue,title,filler)){
             ApiFResponse response = new ApiFResponse(true,"提交成功！");
             return ResponseEntity.ok().body(response);
