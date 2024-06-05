@@ -54,7 +54,7 @@ export default {
   } ,
   methods:{
     goToChange() {  
-      this.$router.push({ name: 'FormChange', params: { id: this.sum[this.curNum - 1]} });  
+      this.$router.push({ name: 'FormChange', params: { id: this.sum[this.curNum - 1],title:this.title} });  
     } ,
     pageUp(state){
       if (this.curNum - 1 != 0 && state == 1) {

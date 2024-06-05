@@ -19,7 +19,7 @@
   import NavBar from './NavBar.vue'; 
   import axios from 'axios';
   export default {  
-    props: ['id'], // 接收从父组件传递过来的
+    props: ['id','titile'], // 接收从父组件传递过来的
     data() {  
     return {  
       item:this.$store.state.item,

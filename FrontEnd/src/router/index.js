@@ -63,7 +63,7 @@ const routes = [
         props: true
     },
     {
-        path: '/form-change/:id',
+        path: '/form-change/:id/:title',
         name: 'FormChange',
         component: FormChange,
         props: true
