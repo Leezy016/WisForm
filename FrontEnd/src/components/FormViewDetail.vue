@@ -40,12 +40,13 @@ export default {
   data() {  
     return {  
       sum:[],//id列表
+      num: [],//总条目数
       nums: [],
       curNum: 1,//当前页数默认1
 
       getcErrorMessage:'',
       getsErrorMessage:'', 
-      changeable:1,
+      changeable:false,
     };  
   }, 
   components: {  
@@ -122,6 +123,9 @@ export default {
 },
 getContent(id){
   //console.log(id),
+  this.$store.commit('SET_ITEM',[]),
+  this.$store.commit('SET_CONTENT', []),
+  this.changeable=false
   axios.post('http://localhost:8080/viewform/getContent', {  
     num:id,
     title:this.title,
@@ -130,11 +134,13 @@ getContent(id){
     if (response.data.success) {  
       //console.log("success"),
       this.$store.commit('SET_ITEM', response.data.item),
-      this.$store.commit('SET_CONTENT', response.data.itemValue)
-      //changeable:
+      this.$store.commit('SET_CONTENT', response.data.itemValue),
+      this.changeable=response.data.changeable,
+      console.log(this.changeable)
     }
     else {  
       this.getcErrorMessage = response.data.message || '表单获取失败，请稍后再试';  
+      alert(response.data.message);
     }
    })  
   .catch(error => {  
