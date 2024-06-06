@@ -1,72 +1,92 @@
 <template>
+    <div>
+      <NavBar/>
+    </div>
   <div class="user-management">
-    <h2>用户管理</h2>
-    <form @submit.prevent="addUser">
-      <input type="text" v-model="newUser.username" placeholder="用户名">
-      <input type="text" v-model="newUser.userType" placeholder="用户类型">
-      <button type="submit">添加用户</button>
-    </form>
-    
-    <table>
-      <thead>
-        <tr>
-          <th>用户名</th>
-          <th>用户类型</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(user, index) in users" :key="index">
-          <td>{{ user.username }}</td>
-          <td>{{ user.userType }}</td>
-          <td>
-            <button @click="editUser(user)">编辑</button>
-            <button @click="deleteUser(user)">删除</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <table class="table">  
+      <thead>  
+        <tr><th>用户管理</th></tr>  
+      </thead>  
+      <tbody>  
+        <tr v-for="(name,index) in names" :key="index" >  
+          <td>{{ name }}</td>  
+          <button type="view" class="view-btn" @click="deleteUser(name)">查看</button>
+        </tr>  
+      </tbody>  
+    </table> 
+    <p v-if="getErrorMessage" class="errorMessage">{{ getErrorMessage }}</p>
+    </div>
 </template>
 
 <script>
+import NavBar from './NavBar.vue'; 
+import axios from 'axios';
 export default {
-  data() {
-    return {
-      users: [], // 用户列表
-      newUser: { username: '', userType: '' } // 添加新用户表单数据
-    };
-  },
-  mounted() {
-    // 模拟从后端获取用户列表
-    this.users = [
-      { username: '用户1', userType: '管理员' },
-      // 添加更多用户
-    ];
-  },
-  methods: {
-    addUser() {
-      // 添加新用户
-      this.users.push({ username: this.newUser.username, userType: this.newUser.userType });
-      // 清空表单数据
-      this.newUser.username = '';
-      this.newUser.userType = '';
+  components: {
+      NavBar
     },
-    editUser(user) {
-      // 编辑用户，可以弹出模态框进行编辑
-      console.log('编辑用户:', user);
-    },
-    deleteUser(user) {
-      // 删除用户，可以弹出确认对话框
-      const index = this.users.indexOf(user);
-      if (index !== -1) {
-        this.users.splice(index, 1);
-      }
-    }
-  }
+    data() {  
+    return {  
+      username:'',
+      names:[],
+      roles:[],
+      getErrorMessage:'',
+      deleteErrorMessage:'',
+    };  
+  },  
+  methods: {  
+    getNames() {  
+      axios.post('http://localhost:8080/viewform/select', {  
+        username:this.$store.state.username
+        })  
+        .then(response => {  
+          if (response.data.success) {  
+            this.names=response.data.names
+          }
+          else {  
+            this.getErrorMessage = response.data.message || '用户列表获取失败，请稍后再试';  
+          }
+         })  
+        .catch(error => {  
+          if (error.response) { 
+            this.getErrorMessage = error.response.data;   
+          }
+          else {
+            this.getErrorMessage = '用户列表获取失败，请稍后再试';
+          }
+        });  
+    },  
+    deleteUser(username) {  
+      axios.post('http://localhost:8080/viewform/select', {  
+        username:username
+        })  
+        .then(response => {  
+          if (response.data.success) {  
+            alert('删除用户成功');
+          }
+          else {  
+            this.deleteErrorMessage = response.data.message || '删除用户失败，请稍后再试';  
+          }
+         })  
+        .catch(error => {  
+          if (error.response) { 
+            this.deleteErrorMessage = error.response.data;   
+          }
+          else {
+            this.deleteErrorMessage = '删除用户失败，请稍后再试';
+          }
+        });
+    }  
+  },  
+  created() {  
+    this.getNames(); // 在组件创建时获取数据  
+  }  
 };
 </script>
 
 <style scoped>
-/* 样式 */
+.user-management{
+  max-width: 300px;
+  margin: auto;
+  }
 </style>

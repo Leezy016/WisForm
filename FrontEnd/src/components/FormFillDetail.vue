@@ -4,11 +4,12 @@
     </div>
     <div class="form-detail">  
       <p>{{ title }}</p>  
-      <!-- 在这里添加其他详情页面的内容 -->  
+
       <div v-for="(itemName, index) in item" :key="index" class="form-group">  
         <label>{{ itemName }}</label>  
-          <input v-model="content[index]" />  
-        </div>  
+          <input v-model="content[index]" @focus="keyJudge(item[index],content[index],index)"  @blur="keyMatch(item[index],content[index])" />
+      </div>  
+
         <button type="button" class="submit-btn" @click="submitForm">提交</button> 
         <button type="button" class="return-btn" @click="goBack">返回</button>
         <p v-if="getErrorMessage" class="errorMessage">{{ getErrorMessage }}</p> 
@@ -26,23 +27,67 @@
       item: [],
       content:[],
       getErrorMessage:'',
-      submitErrorMessage:''
+      submitErrorMessage:'',
+      matchErrorMessage:'',
+      keys:["姓名","作者姓名","项目名称","论文标题"],
+      selectedValue: '',
+      isKey:false,
     };  
     },  
     components: {
       NavBar,
     },
     methods:{
+      onValueChange() {  
+      // 当选中值改变时触发的方法（可选）  
+      console.log('Selected value changed to:', this.selectedValue);  
+    },  
+    Match(item, itemValue,index) {  
+      console.log(`match for item: ${item}, value: ${itemValue}`); 
+      this.content[index]="院长";
+      // axios.post('http://localhost:8080/key-match', {  
+      //   item:item,
+      //   itemValue:itemValue
+      //   })  
+      //   .then(response => {  
+      //     if (response.data.success) {  
+      //       this.content[index]=response.data.itemValue
+      //     }
+      //    })
+    }, 
+    keyMatch(item, itemValue) {    
+      if(this.isKey){
+        console.log(`sent item: ${item}, value: ${itemValue}`);
+      // axios.post('http://localhost:8080/key-match', {  
+      //   item:item,
+      //   itemValue:itemValue
+      //   })  
+      //   .then(response => {  
+      //     if (response.data.success) {  
+      //       this.content[index]=response.data.itemValue
+      //     }
+      //    })
+        this.isKey=false;
+      }
+    },
+    keyJudge(item,itemValue,index){  
+      for (let i = 0; i < this.keys.length; i++) {   
+        if (this.keys[i] === item) {  
+          this.isKey = true;  
+          break;  
+        }  
+      }  
+      if (this.isKey===false) {  
+        this.Match(item, itemValue,index);  
+      }  
+    },
     getItems() {   
       axios.post('http://localhost:8080/fillform-desplay', {
         name:this.title,
       })  
       .then(response => {  
         if (response.data.success) { 
-          //console.log('表单内容获取成功'); 
           this.item=response.data.item;
-          console.log("item1="),
-          console.log(this.item)
         }
         else {  
           this.getErrorMessage = response.data.message || '表单内容获取失败，请稍后再试';  

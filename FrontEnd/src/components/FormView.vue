@@ -6,7 +6,7 @@
         <tr><th>请选择需要查看的表单</th></tr>  
       </thead>  
       <tbody>  
-        <tr v-for="(title,index) in titles" :key="index" @click="goToDetail(title)">  
+        <tr v-for="(title,index) in titles" :key="index" >  
           <td>{{ title }}</td>  
           <button type="view" class="view-btn" @click="goToDetail(title)">查看</button>
         </tr>  
@@ -32,8 +32,6 @@ export default {
   },
   methods: {  
     getTitles() {  
-      //console.log(this.num) ;
-      //console.log(this.$store.state.username);
       axios.post('http://localhost:8080/viewform/select', {  
         num:this.num,
         name:this.$store.state.username
