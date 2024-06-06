@@ -26,20 +26,21 @@ export default {
         2: '- 我填写的',
         3: '- 我发布的',
         4: '- 我可查看',
-        5: '创建表单',  
-        6: '填写表单',
-        7: '管理人员'
+        5: '- 表项检索',
+        6: '创建表单',  
+        7: '填写表单',
+        8: '用户管理'
       };  
     },
     linkMap() {  
       return {  
-        //1: '/form-view',
         2: '/form-view/2',
         3: '/form-view/1',
         4: '/form-view/3',
-        5: '/form-create',  
-        6: '/form-fill',
-        7: '/user-management'
+        5: '/search-by-item',
+        6: '/form-create',  
+        7: '/form-fill',
+        8: '/user-management'
       };  
     },    
   },

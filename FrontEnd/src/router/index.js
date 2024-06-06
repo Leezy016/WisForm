@@ -9,6 +9,7 @@ import FormCreate from '../components/FormCreate.vue';
 import FormFillDetail from '../components/FormFillDetail.vue';
 import FormViewDetail from '../components/FormViewDetail.vue';
 import FormChange from '../components/FormChange.vue';
+import SearchByItem from '../components/SearchByItem.vue';
 
 const routes = [
     {
@@ -67,7 +68,12 @@ const routes = [
         name: 'FormChange',
         component: FormChange,
         props: true
-    }
+    },
+    {
+        path: '/search-by-item',
+        name: 'SearchByItem',
+        component: SearchByItem,
+    },
 ];
 
 const router = createRouter({
