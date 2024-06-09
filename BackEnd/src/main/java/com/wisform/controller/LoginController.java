@@ -30,22 +30,25 @@ public class LoginController {
 
         Person optionalPerson = personRepository.findByName(username);
         // 在这里进行登录验证逻辑，模拟简单的验证过程
-        if (optionalPerson!=null) {
-            //System.out.println(person.getPasswd())
-            if (optionalPerson.getPasswd().equals(password)) {
-                identity = optionalPerson.getIdentity();
-                List<Object> permissions = new ArrayList<>();
-                List<String> department = new ArrayList<>();
-                String role = optionalPerson.getIdentity();
-                permissions = personRepository.getroleControl(identity);
-                department = optionalPerson.getDepartment();
-                ApiResponse response = new ApiResponse(true, "登录成功",role,permissions,department);
-                response.apiout();
-                return ResponseEntity.ok().body(response);
-            }else
-                return ResponseEntity.ok().body(new ApiResponse(false, "密码错误"));
+        if (optionalPerson!=null ) {
+            if(optionalPerson.getEnable()!=0){
+                if (optionalPerson.getPasswd().equals(password)) {
+                    identity = optionalPerson.getIdentity();
+                    List<Object> permissions = new ArrayList<>();
+                    List<String> department = new ArrayList<>();
+                    String role = optionalPerson.getIdentity();
+                    permissions = personRepository.getroleControl(identity);
+                    department = optionalPerson.getDepartment();
+                    ApiResponse response = new ApiResponse(true, "登录成功",role,permissions,department);
+                    response.apiout();
+                    return ResponseEntity.ok().body(response);
+                }else{
+                    return ResponseEntity.ok().body(new ApiResponse(false, "密码错误"));
+                }
+            }else{
+                return ResponseEntity.ok().body(new ApiResponse(false, "账户被冻结！"));
+            }
         } else {
-            // 用户不存在，登录失败
             return ResponseEntity.ok().body(new ApiResponse(false, "用户名不存在"));
         }
 

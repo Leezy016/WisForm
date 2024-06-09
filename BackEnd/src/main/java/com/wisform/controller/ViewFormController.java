@@ -155,4 +155,12 @@ public class ViewFormController {
             return ResponseEntity.ok().body(response);
         }
     }
+    @PostMapping("/search")//未
+    public ResponseEntity<?> search(@RequestBody AnswerForm answerForm) {
+        String siterm = answerForm.getTitle();
+        List<String> ans = answerRepository.findValuesByItemContaining(siterm);
+        ApiFResponse response1 = new ApiFResponse(true,"搜索成功",ans);
+        return ResponseEntity.ok(response1);
+
+    }
 }
