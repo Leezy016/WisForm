@@ -46,7 +46,6 @@ public class CreateFormController {
             newList.add("teacher");
         }
         if (optionalFFormat!=null) {
-            System.out.print("收集表已存在，请修改收集表名称");
             return ResponseEntity.ok().body(new ApiResponse(false, "收集表已存在，请修改收集表名称"));
         } else {
             //FFormat newfFormat = new FFormat(Item,ItemType,Publisher,name);

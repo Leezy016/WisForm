@@ -10,8 +10,15 @@ public class ApiResponse {
     private String role;
     private List<String> department;
 
+    private List<String> names;
+    private long ex;
 
-
+    public ApiResponse(boolean success, String message,List<String> names,long ex){
+        this.success = success;
+        this.message = message;
+        this.names = names;
+        this.ex = ex;
+    }
 
     public ApiResponse(boolean success, String message,List<Object> permissions) {
         this.success = success;
@@ -50,6 +57,10 @@ public class ApiResponse {
 
     public List<Object> getPermissions(){
         return permissions;
+    }
+
+    public List<String>getNames(){
+        return names;
     }
     public void setMessage(String message) {
         this.message = message;

@@ -21,7 +21,6 @@ public class RegistController {
         String identity = form.getIdentity();
         String department = form.getDepartment();
         Person user = new Person(username,identity,password);
-        //System.out.println("check department: "+form.getDepartment());
         try {
             Person newUser = registService.registerUser(user,department);
             return ResponseEntity.ok(new ApiResponse(true, "注册成功"));

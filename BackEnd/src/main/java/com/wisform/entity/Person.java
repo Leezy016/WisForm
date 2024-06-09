@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.annotation.sql.DataSourceDefinition;
 import lombok.Data;
 import org.neo4j.ogm.annotation.*;
+import org.springframework.data.neo4j.annotation.Query;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,7 +26,9 @@ public class Person implements Serializable {
     private String passwd;
 
     @Property
-    private List<String> department;;
+    private List<String> department;
+    @Property
+    private int enable;
 
     public Person(String name, String identity, String passwd) {
         this.name = name;
@@ -54,6 +57,10 @@ public class Person implements Serializable {
     }
     public void setDepartment(List<String> department) {
         this.department = department;
+    }
+
+    public int getEnable() {
+        return enable;
     }
 }
 
