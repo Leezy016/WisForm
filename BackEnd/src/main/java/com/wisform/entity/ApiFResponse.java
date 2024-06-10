@@ -30,12 +30,11 @@ public class ApiFResponse {
         this.Item = Item;
     }
 
-    public ApiFResponse(boolean success, String message,List<String> item, List<String> itemValue,boolean changeable) {
+    public ApiFResponse(boolean success, String message,List<String> item, List<String> itemValue) {
         this.success=success;
         this.message=message;
         this.Item = item;
         this.ItemValue = itemValue;
-        this.changeable = changeable;
     }
     public boolean isSuccess() {
         return success;
@@ -68,12 +67,6 @@ public class ApiFResponse {
     public ApiFResponse(boolean success, String message){
         this.success = success;
         this.message = message;
-    }
-
-    public  ApiFResponse(boolean success, String message,String ans){
-        this.success = success;
-        this.message = message;
-        this.ans = ans;
     }
 
     public boolean getChangeable() {
