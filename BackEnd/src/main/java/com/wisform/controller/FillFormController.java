@@ -33,32 +33,20 @@ public class FillFormController {
     private AnswerRepository answerRepository;
     @Autowired
     private FFormatRepository fFormatRepository;
-    @PostMapping("/fillformlist")//返回可填的表单列表（role限制，ddl限制）
+    @PostMapping("/fillformlist")
     public ResponseEntity<?> formlist(@RequestBody LoginForm loginForm) {//改
-        //reuseService.Initial();
         String name = loginForm.getUsername();
         String role = personRepository.findIdentityByName(name);
         //System.out.print(role);
-        List<String> formlist_ = new ArrayList<>();
-        //role限制
-        formlist_ = fillFormRepository.findFFormatByRole(role);
-        //ddl限制
-        LocalDate time = LocalDate.now();//转为Date型
-        LocalDate ddl;
         List<String> formlist = new ArrayList<>();
-        for (String item : formlist_) {
-            ddl = answerRepository.checkdate(item);
-            if(time.isBefore(ddl)){
-                formlist.add(item);
-            }
-        }
+        formlist = fillFormRepository.findFFormatByRole(role);
         //System.out.print(formlist);
         ApiFResponse response = new ApiFResponse(true,"获取表单列表成功",formlist);
 
         return ResponseEntity.ok().body(response);
     }
 
-    @PostMapping("/fillform-desplay")//展示具体选中的表的内容
+    @PostMapping("/fillform-desplay")
     public ResponseEntity<?> formdesplay(@RequestBody FFormat fFormat) {
         reuseService.Initial();
         String title = fFormat.getName();
@@ -77,7 +65,12 @@ public class FillFormController {
         }
 
     }
-    @PostMapping("/fillform-recieve")//接收填写的回答，并且赋予id保存回数据库
+    //@PostMapping("/anto-fill")
+    //public ResponseEntity<?> autofill() {
+        //ApiFResponse response = new ApiFResponse();
+        //return ResponseEntity.ok().body(response);
+    //}
+    @PostMapping("/fillform-recieve")
     public ResponseEntity<?> fillform(@RequestBody AnswerForm answerForm) {
         reuseService.commitAll();
         String title = answerForm.getTitle();
