@@ -78,7 +78,7 @@ export default {
     jump(num){
         this.curNum = num;
         this.pagers();
-        this.getContent(this.sum[num]);
+        this.getContent(this.sum[num-1]);
       },//跳转页码
     pagers(){
         //重置
@@ -111,6 +111,8 @@ export default {
       this.sum=response.data.titles;
       this.pagers();
       this.getContent(this.sum[0]);
+      console.log("sum=");
+      console.log(this.sum);
     }
     else {  
       this.getsErrorMessage = response.data.message || '表单获取失败，请稍后再试';  
@@ -127,7 +129,8 @@ export default {
   }); 
 },
 getContent(id){
-  //console.log(id),
+  console.log("id="),
+  console.log(id),
   this.$store.commit('SET_ITEM',[]),
   this.$store.commit('SET_CONTENT', []),
   this.changeable=false
@@ -137,11 +140,9 @@ getContent(id){
   })  
   .then(response => {  
     if (response.data.success) {  
-      //console.log("success"),
       this.$store.commit('SET_ITEM', response.data.item),
       this.$store.commit('SET_CONTENT', response.data.itemValue),
-      this.changeable=response.data.changeable,
-      console.log(this.changeable)
+      this.changeable=response.data.changeable
     }
     else {  
       this.getcErrorMessage = response.data.message || '表单获取失败，请稍后再试';  

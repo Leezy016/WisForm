@@ -46,8 +46,8 @@ export default {
     }, 
     methods:{
         search(){
-          console.log(this.item)
         this.title=this.item;
+        if(this.item){
         axios.post('http://localhost:8080/viewform/search', {  
         title:this.item
         })  
@@ -68,6 +68,7 @@ export default {
             this.getErrorMessage = '信息失败，请稍后再试';
           }
         });
+      }
         }
     }
 

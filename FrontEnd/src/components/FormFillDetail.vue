@@ -82,11 +82,12 @@
           if (!response.data.success) {  
             this.content[index]=this.$store.state.username;
             alert("该表只能填写本人相关信息");
+            this.keyMatch(item,this.$store.state.username,index);
           }
          })
     },
     judge(item,itemValue,index){
-      if(this.isKey){
+      if(this.isKey&&itemValue){
         this.keyMatch(item,itemValue,index);
         this.isKey=false;
       }
