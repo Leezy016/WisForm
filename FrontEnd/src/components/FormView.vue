@@ -62,7 +62,7 @@ export default {
   },  
   created() {  
     this.getTitles(); // 在组件创建时获取数据  
-    console.log(this.titles);
+    //console.log(this.titles);
   }  
 };  
 </script>
