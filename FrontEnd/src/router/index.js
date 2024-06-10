@@ -9,9 +9,6 @@ import FormCreate from '../components/FormCreate.vue';
 import FormFillDetail from '../components/FormFillDetail.vue';
 import FormViewDetail from '../components/FormViewDetail.vue';
 import FormChange from '../components/FormChange.vue';
-import SearchByItem from '../components/SearchByItem.vue';
-
-
 
 const routes = [
     {
@@ -66,15 +63,10 @@ const routes = [
         props: true
     },
     {
-        path: '/form-change/:id/:title',
+        path: '/form-change/:id',
         name: 'FormChange',
         component: FormChange,
         props: true
-    },
-    {
-        path: '/search-by-item',
-        name: 'SearchByItem',
-        component: SearchByItem,
     }
 ];
 
