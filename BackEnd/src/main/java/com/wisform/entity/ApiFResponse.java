@@ -10,8 +10,6 @@ public class ApiFResponse {
     private List<String> Item;
     private List<String> ItemValue;
 
-    private boolean changeable;
-
     private int num;
 
     public ApiFResponse(boolean success, String message,int num){
@@ -31,6 +29,7 @@ public class ApiFResponse {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public ApiFResponse(boolean success, String message,List<String> Item, List<String> ItemValue) {
         this.success=success;
         this.message=message;
@@ -39,12 +38,18 @@ public class ApiFResponse {
 
 =======
     public ApiFResponse(boolean success, String message,List<String> item, List<String> itemValue,boolean changeable) {
+=======
+    public ApiFResponse(boolean success, String message,List<String> item, List<String> itemValue) {
+>>>>>>> 0f7c2754 (查看表格)
         this.success=success;
         this.message=message;
         this.Item = item;
         this.ItemValue = itemValue;
+<<<<<<< HEAD
         this.changeable = changeable;
 >>>>>>> da1d377a (0605lhq)
+=======
+>>>>>>> 0f7c2754 (查看表格)
     }
     public boolean isSuccess() {
         return success;

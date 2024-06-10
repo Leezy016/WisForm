@@ -84,7 +84,6 @@ public class ViewFormController {
         String formatname = (String) requestBody.get("formatname");
         List<String> Answerlist = new ArrayList<>();
         Answerlist = answerRepository.findAnswersByFormatname(formatname);
-
         ApiFResponse response1 = new ApiFResponse(true,"获取回答个数成功",Answerlist);
         return ResponseEntity.ok(response1);
     }
