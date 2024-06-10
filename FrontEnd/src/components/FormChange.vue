@@ -3,10 +3,22 @@
       <NavBar/>
     </div>
     <div class="form-change">  
+
+      <div class="welcome">  
+        <img src='@/assets/welcome.png' style="width: 500px; height: 80px;"  />  
+        </div>
+
       <p>{{ title }}</p>  
+
       <div v-for="(itemName, index) in this.$store.state.item" :key="index" class="form-group">  
-        <label>{{ itemName }}</label>  
-          <input v-model="this.$store.state.content[index]" />  
+        <label>{{ itemName }}</label> 
+        <div style="margin: 5px 0" />
+        <el-input
+        v-model="this.$store.state.content[index]"
+        style="width: 400px"
+        autosize
+        /> 
+        <div style="margin: 15px 0" />
         </div>  
         <button type="button" class="submit-btn" @click="submitForm">提交</button> 
         <button type="button" class="return-btn" @click="goBack">返回</button>
@@ -19,7 +31,7 @@
   import NavBar from './NavBar.vue'; 
   import axios from 'axios';
   export default {  
-    props: ['id'], // 接收从父组件传递过来的
+    props: ['id','titile'], // 接收从父组件传递过来的
     data() {  
     return {  
       item:this.$store.state.item,
@@ -74,7 +86,12 @@
   </script>
 
   <style>
-  .form-detail{
+  .form-change{
+    max-width: 400px;
     margin: auto;
   }
+  .container {  
+    display: flex;  
+    flex-direction: row;  
+  }  
 </style>
