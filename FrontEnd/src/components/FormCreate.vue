@@ -206,13 +206,9 @@
         .then(response => {  
           //console.log('后端返回数据：', response.data); 
           if (response.data.success) { 
-            this.selectedFields=[{ id: 'field1', label: '', type: 'text' }],
-            this.showForm= false,
-            this.formTitle='',
-            this.only= 0 ,
-            this.roleList=[0,0,0],
-            this.ddl="",
-            this.date=new Date(),
+            this.selectedFields=[{ id: 'field1', label: '字段1', type: 'text' }],
+            this.showForm=false,
+            this.formTitle='' 
             router.push('/form-create'); 
             alert('表单创建成功！');
           }
