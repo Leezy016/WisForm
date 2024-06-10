@@ -2,10 +2,20 @@
     <div>
       <NavBar/>
     </div>
+
   <div class="user-management">
+
+    <div class="welcome">  
+        <img src='@/assets/welcome.png' style="width: 500px; height: 80px;"  />  
+        </div>
+      <div class="text">
+        <p style="color: black;">用户管理</p>
+      </div>
+
+
     <table class="table">  
       <thead>  
-        <tr><th>用户管理</th></tr>  
+        <tr><th>用户名</th></tr>  
       </thead>  
       <tbody>  
         <tr v-for="(name,index) in names" :key="index" >  
@@ -36,7 +46,7 @@ export default {
   },  
   methods: {  
     getNames() {  
-      axios.post('http://localhost:8080/viewform/select', {  
+      axios.post('http://localhost:8080/manage/get-list', {  
         username:this.$store.state.username
         })  
         .then(response => {  
@@ -57,7 +67,7 @@ export default {
         });  
     },  
     deleteUser(username) {  
-      axios.post('http://localhost:8080/viewform/select', {  
+      axios.post('http://localhost:8080/manage/action', {  
         username:username
         })  
         .then(response => {  
@@ -86,7 +96,7 @@ export default {
 
 <style scoped>
 .user-management{
-  max-width: 300px;
+  max-width: 400px;
   margin: auto;
   }
 </style>

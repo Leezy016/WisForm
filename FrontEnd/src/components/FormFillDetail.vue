@@ -3,11 +3,26 @@
       <NavBar/>
     </div>
     <div class="form-detail">  
+
+      <div class="welcome">  
+        <img src='@/assets/welcome.png' style="width: 500px; height: 80px;"  />  
+        </div>
+
       <p>{{ title }}</p>  
 
       <div v-for="(itemName, index) in item" :key="index" class="form-group">  
-        <label>{{ itemName }}</label>  
-          <input v-model="content[index]" @focus="keyJudge(item[index],content[index],index)"  @blur="keyMatch(item[index],content[index])" />
+        <label class="label">{{ itemName }}</label>  
+        <div style="margin: 5px 0" />
+        <el-input
+        v-model="content[index]"
+        style="width: 400px"
+        autosize
+        type="textarea"
+        @focus="keyJudge(item[index],content[index],index)"
+        @blur="judge(item[index],content[index],index)"
+        
+        />
+        <div style="margin: 15px 0" />
       </div>  
 
         <button type="button" class="submit-btn" @click="submitForm">提交</button> 
@@ -44,30 +59,30 @@
     },  
     Match(item, itemValue,index) {  
       console.log(`match for item: ${item}, value: ${itemValue}`); 
-      this.content[index]="院长";
-      // axios.post('http://localhost:8080/key-match', {  
-      //   item:item,
-      //   itemValue:itemValue
-      //   })  
-      //   .then(response => {  
-      //     if (response.data.success) {  
-      //       this.content[index]=response.data.itemValue
-      //     }
-      //    })
+      axios.post('http://localhost:8080/match', {  
+        item:item,
+        itemValue:itemValue
+        })  
+        .then(response => {  
+          if (response.data.success) {  
+            this.content[index]=response.data.ans
+          }
+         })
     }, 
     keyMatch(item, itemValue) {    
-      if(this.isKey){
         console.log(`sent item: ${item}, value: ${itemValue}`);
-      // axios.post('http://localhost:8080/key-match', {  
-      //   item:item,
-      //   itemValue:itemValue
-      //   })  
-      //   .then(response => {  
-      //     if (response.data.success) {  
-      //       this.content[index]=response.data.itemValue
-      //     }
-      //    })
+      axios.post('http://localhost:8080/key-match', {  
+        item:item,
+        itemValue:itemValue
+        }) 
+    },
+    judge(item,itemValue,index){
+      if(this.isKey){
+        this.keyMatch(item,itemValue);
         this.isKey=false;
+      }
+      else{
+        this.Match(item,itemValue,index);
       }
     },
     keyJudge(item,itemValue,index){  
@@ -147,6 +162,28 @@
 
   <style>
   .form-detail{
+    max-width: 400px;
     margin: auto;
   }
+  .container {  
+    display: flex;  
+    flex-direction: row;  
+  }  
+  .lable{
+    margin-bottom: 10px;
+  }
+  .submit-btn,.return-btn {  
+  margin-left: 70px; /* 左边距 */  
+  padding: 8px 15px; /* 内边距 */  
+  background-color: #6292ff; /* 蓝色背景 */  
+  color: #fff; /* 白色文本 */  
+  border: none; /* 无边框 */  
+  border-radius: 8px; /* 圆角 */  
+  cursor: pointer; /* 鼠标悬停时变为小手图标 */  
+  transition: background-color 0.3s ease; /* 背景色过渡效果 */  
+  margin-top: 7px;
+}  
+  
+
+
 </style>
