@@ -38,10 +38,7 @@ public class ViewFormController {
     public ResponseEntity<?> select(@RequestBody Map<String, Object> requestBody) {//不知道和前端对不对应
         String num = (String) requestBody.get("num");
         String name = (String) requestBody.get("name");
-<<<<<<< HEAD
-=======
         globals = num;
->>>>>>> da1d377a (0605lhq)
         //System.out.print(num);
         //System.out.print(name);
         if (num.equals("1")) {//发布的
@@ -94,20 +91,6 @@ public class ViewFormController {
     public ResponseEntity<?> getContent(@RequestBody Map<String, Object> requestBody) {
         String numm = (String) requestBody.get("num");
         String title = (String) requestBody.get("title");
-<<<<<<< HEAD
-        System.out.print(numm);
-        long num = Long.parseLong(numm);
-        List<String> Itemlist = new ArrayList<>();
-        Itemlist = answerRepository.findItemById(num,title);
-        List<String> Valuelist = new ArrayList<>();
-        Valuelist = answerRepository.findValueById(num,title);
-        if(Itemlist!= null){
-            ApiFResponse response = new ApiFResponse(true,"获取回答成功",Itemlist, Valuelist);
-            return ResponseEntity.ok().body(response);
-        }else{
-            return ResponseEntity.ok().body(new ApiFResponse(false,"获取表单失败!"));
-        }
-=======
         long num;
         //System.out.print(numm);
         if(numm!=null){
@@ -138,7 +121,6 @@ public class ViewFormController {
         }
 
 
->>>>>>> da1d377a (0605lhq)
     }
 
     @PostMapping("/form-change")
@@ -154,5 +136,15 @@ public class ViewFormController {
             ApiFResponse response = new ApiFResponse(false,"修改失败！");
             return ResponseEntity.ok().body(response);
         }
+    }
+    @PostMapping("/search")//未
+    public ResponseEntity<?> search(@RequestBody Map<String, Object> requestBody) {
+        String siterm = (String) requestBody.get("title");
+        System.out.print(siterm+"\n");
+        List<String> ans = answerRepository.findValuesByItemContaining(siterm);
+        System.out.print(ans+"\n");
+        ApiFResponse response1 = new ApiFResponse(true,"搜索成功",ans);
+        return ResponseEntity.ok(response1);
+
     }
 }

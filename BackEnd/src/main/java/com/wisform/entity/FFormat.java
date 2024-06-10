@@ -52,8 +52,6 @@ public class FFormat {
     public FFormat(String name){
         this.name = name;
     }
-    public FFormat(){
-    }
 
     public FFormat(){}
 
