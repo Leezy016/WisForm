@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/viewform")
@@ -81,7 +78,7 @@ public class ViewFormController {
         String formatname = (String) requestBody.get("formatname");
         List<String> Answerlist = new ArrayList<>();
         Answerlist = answerRepository.findAnswersByFormatname(formatname);
-
+        System.out.print(Answerlist+"\n");
         ApiFResponse response1 = new ApiFResponse(true,"获取回答个数成功",Answerlist);
         return ResponseEntity.ok(response1);
     }
@@ -141,7 +138,9 @@ public class ViewFormController {
     public ResponseEntity<?> search(@RequestBody Map<String, Object> requestBody) {
         String siterm = (String) requestBody.get("title");
         System.out.print(siterm+"\n");
-        List<String> ans = answerRepository.findValuesByItemContaining(siterm);
+        List<String> ans_ = answerRepository.findValuesByItemContaining(siterm);
+        Set<String> set = new LinkedHashSet<>(ans_); // LinkedHashSet保留了元素的插入顺序
+        List<String> ans = new ArrayList<>(set);
         System.out.print(ans+"\n");
         ApiFResponse response1 = new ApiFResponse(true,"搜索成功",ans);
         return ResponseEntity.ok(response1);
