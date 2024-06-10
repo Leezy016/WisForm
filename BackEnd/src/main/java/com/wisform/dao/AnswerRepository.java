@@ -26,6 +26,7 @@ public interface  AnswerRepository extends Neo4jRepository<Answer, Long> {
     @Query("MATCH (f:FFormat{name:$name}) RETURN f.ddl AS date")
     LocalDate checkdate(String name);
 
+<<<<<<< HEAD
     @Query("MATCH (a:Answer {id:$id})set a.item = $item,a.value = $itemValue ")
     void coverById(Long id, List<String> item, List<String> itemValue);
 
@@ -37,3 +38,17 @@ public interface  AnswerRepository extends Neo4jRepository<Answer, Long> {
             "RETURN correspondingValue")
     List<String> findValuesByItemContaining(@Param("siterm") String siterm);
 }
+=======
+    @Query("MATCH (n:Answer {id: $idParam,title: $title})UNWIND n.item AS itemString RETURN itemString")
+    List<String> findItemById(@Param("idParam") long idParam ,@Param("title") String title);//string类型吗
+
+    @Query("MATCH (n:Answer {id: $idParam,title: $title})UNWIND n.value AS itemString RETURN itemString")
+    List<String> findValueById(@Param("idParam") long idParam ,@Param("title") String title);//string类型吗
+
+    @Query("MATCH (f:FFormat{name:$name}) RETURN f.ddl AS date")
+    LocalDate checkdate(String name);
+
+    @Query("MATCH (a:Answer {id:$id})set a.item = $item,a.value = $itemValue ")
+    void coverById(Long id, List<String> item, List<String> itemValue);
+}
+>>>>>>> FrontEnd

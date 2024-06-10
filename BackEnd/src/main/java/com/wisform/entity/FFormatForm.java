@@ -52,4 +52,9 @@ public class FFormatForm {
 
     public boolean getOnly() { return only; }
 
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> FrontEnd

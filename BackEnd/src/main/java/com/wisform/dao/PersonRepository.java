@@ -48,11 +48,11 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
     @Query("MATCH (p:Person{name:$username})SET p.enable=0 ")
     void unableByName(String username);
 
-    @Query("MATCH (p:Person {name: $itemValue1})"+
-            "RETURN\n"+
-                "CASE\n"+
-                    "WHEN p[$key] IS NOT NULL THEN p[$key]\n"+
-                    "ELSE NULL\n"+
+    @Query("MATCH (p:Person {name: $itemValue1}"+
+            "RETURN"+
+                "CASE"+
+                    "WHEN p[$key] IS NOT NULL THEN p[$key]"+
+                    "ELSE NULL"+
                 "END AS itemValue")
     String getItemByKey(String itemValue1, String key);
     @Query("MATCH (p:Person {name: $name}) " +

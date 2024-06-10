@@ -33,6 +33,7 @@ public class FillFormController {
     private AnswerRepository answerRepository;
     @Autowired
     private FFormatRepository fFormatRepository;
+<<<<<<< HEAD
     @PostMapping("/fillformlist")//返回可填的表单列表（role限制，ddl限制）
     public ResponseEntity<?> formlist(@RequestBody LoginForm loginForm) {//改
         //reuseService.Initial();
@@ -52,13 +53,26 @@ public class FillFormController {
                 formlist.add(item);
             }
         }
+=======
+    @PostMapping("/fillformlist")
+    public ResponseEntity<?> formlist(@RequestBody LoginForm loginForm) {//改
+        String name = loginForm.getUsername();
+        String role = personRepository.findIdentityByName(name);
+        //System.out.print(role);
+        List<String> formlist = new ArrayList<>();
+        formlist = fillFormRepository.findFFormatByRole(role);
+>>>>>>> FrontEnd
         //System.out.print(formlist);
         ApiFResponse response = new ApiFResponse(true,"获取表单列表成功",formlist);
 
         return ResponseEntity.ok().body(response);
     }
 
+<<<<<<< HEAD
     @PostMapping("/fillform-desplay")//展示具体选中的表的内容
+=======
+    @PostMapping("/fillform-desplay")
+>>>>>>> FrontEnd
     public ResponseEntity<?> formdesplay(@RequestBody FFormat fFormat) {
         reuseService.Initial();
         String title = fFormat.getName();
@@ -77,7 +91,16 @@ public class FillFormController {
         }
 
     }
+<<<<<<< HEAD
     @PostMapping("/fillform-recieve")//接收填写的回答，并且赋予id保存回数据库
+=======
+    //@PostMapping("/anto-fill")
+    //public ResponseEntity<?> autofill() {
+        //ApiFResponse response = new ApiFResponse();
+        //return ResponseEntity.ok().body(response);
+    //}
+    @PostMapping("/fillform-recieve")
+>>>>>>> FrontEnd
     public ResponseEntity<?> fillform(@RequestBody AnswerForm answerForm) {
         reuseService.commitAll();
         String title = answerForm.getTitle();
@@ -100,4 +123,8 @@ public class FillFormController {
             return ResponseEntity.ok().body(response);
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> FrontEnd

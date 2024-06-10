@@ -96,12 +96,18 @@ public class ReuseService {
             System.out.print("Ans: "+ans+'\n');
             if(ans!=null){  //如果返回ans非空说明有这个属性，添加到对应列表
                 personlist2.add(key);
+<<<<<<< HEAD
                 personlistValue2.add("");
+=======
+>>>>>>> FrontEnd
             }
             return ans;
         }else{
             personlist.add(key);
+<<<<<<< HEAD
             personlistValue.add("");
+=======
+>>>>>>> FrontEnd
             return null;
         }
 
@@ -115,16 +121,24 @@ public class ReuseService {
             String ans = projectRepository.getItemByKey(itemValue2,key);
             if(ans!=null){
                 projectlist2.add(key);
+<<<<<<< HEAD
                 projectlistValue2.add("");
+=======
+>>>>>>> FrontEnd
             }
             System.out.print("ans: "+ans+"\n");
             return ans;
         }else{
+<<<<<<< HEAD
             if(projectlist.contains(key)){
                 return null;
             }
             projectlist.add(key);
             projectlistValue.add("");
+=======
+            projectlist.add(key);
+            System.out.print("add success to projectList\n");
+>>>>>>> FrontEnd
             return null;
         }
     }
@@ -138,6 +152,7 @@ public class ReuseService {
         }
         // 输出结果
         if (index != -1) {
+<<<<<<< HEAD
             if((personlistValue.size()>index) && (personlistValue.get(index)!=null)){
                 personlistValue.set(index,itemValue);
             }else{
@@ -147,6 +162,13 @@ public class ReuseService {
             index = personlist2.indexOf(key);
             if(index !=-1){
                 personlistValue2.set(index,itemValue);
+=======
+            personlistValue.add(index,itemValue);
+        } else {
+            index = personlist2.indexOf(key);
+            if(index !=-1){
+                personlistValue2.add(index,itemValue);
+>>>>>>> FrontEnd
             }
         }
     }
@@ -154,13 +176,17 @@ public class ReuseService {
     public void saveProCouple(String key,String itemValue){
         System.out.print("get in saveProCouple\n");
         int index;
+<<<<<<< HEAD
         System.out.print(projectlist+"\n");
         System.out.print(projectlistValue+"\n");
+=======
+>>>>>>> FrontEnd
         if(projectlist!=null){
             index = projectlist.indexOf(key);
         }else{
             index=0;
         }
+<<<<<<< HEAD
         System.out.print(index+"\n");
         // 输出结果
         if (index != -1) {
@@ -171,6 +197,16 @@ public class ReuseService {
             if(index !=-1){
                 projectlistValue2.set(index,itemValue);
 
+=======
+        // 输出结果
+        if (index != -1) {
+
+            projectlistValue.add(index,itemValue);
+        } else {
+            index = projectlist2.indexOf(key);
+            if(index !=-1){
+                projectlistValue2.add(index,itemValue);
+>>>>>>> FrontEnd
             }
         }
     }
@@ -207,4 +243,8 @@ public class ReuseService {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> FrontEnd

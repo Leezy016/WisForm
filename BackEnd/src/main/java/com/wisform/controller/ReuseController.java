@@ -1,6 +1,9 @@
 package com.wisform.controller;
 
+<<<<<<< HEAD
 import com.wisform.dao.FFormatRepository;
+=======
+>>>>>>> FrontEnd
 import com.wisform.entity.ApiFResponse;
 import com.wisform.entity.ApiResponse;
 import com.wisform.entity.MappingTable_Person;
@@ -23,6 +26,7 @@ public class ReuseController {
 
     @Autowired
     private ReuseService reuseService;
+<<<<<<< HEAD
     @Autowired
     private FFormatRepository fFormatRepository;
     @PostMapping("/key-match")
@@ -56,12 +60,28 @@ public class ReuseController {
                 ApiFResponse response = new ApiFResponse(true,"");
                 return ResponseEntity.ok().body(response);
             }
+=======
+    @PostMapping("/key-match")
+    public void keymatch(@RequestBody Map<String, Object> requestBody){
+        System.out.print("get in keymatch\n");
+        String item = (String) requestBody.get("item");
+        String itemValue = (String) requestBody.get("itemValue");//??对接口
+        MappingTable_Person mappingTablePerson = new MappingTable_Person();
+        MappingTable_Project mappingTableProject = new MappingTable_Project();
+        String key = mappingTablePerson.KeyCheck(item);
+        System.out.print("personkey："+key+" value\n"+itemValue+"\n");
+        if(key!=null){
+            reuseService.personKey(key,itemValue);
+>>>>>>> FrontEnd
         }else{
             key = mappingTableProject.KeyCheck(item);//项目匹配
             System.out.print("projectkey："+key+" value\n"+itemValue+"\n");
             reuseService.projectKey(key,itemValue);
+<<<<<<< HEAD
             ApiFResponse response = new ApiFResponse(true,"");
             return ResponseEntity.ok().body(response);
+=======
+>>>>>>> FrontEnd
         }
     }
 
@@ -102,4 +122,8 @@ public class ReuseController {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> FrontEnd

@@ -73,4 +73,9 @@ public class FFormat {
     public String getDDl() {
         return ddl;
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> FrontEnd
