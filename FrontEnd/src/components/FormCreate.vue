@@ -1,36 +1,55 @@
 <template>
+  <div class="form-create">
   <div> 
-    <NavBar/> <!-- 引入并使用NavBar组件 --> 
+    <NavBar/> 
+  </div>
+
+  <div class="welcome">  
+      <img src='@/assets/welcome.png' style="width: 500px; height: 80px;"  />  
+  </div>
+
+  <div class="text">
+    <p style="color: black;">请填写创建表单需要的信息</p>
   </div>
 
   <div class="dynamic-form">  
-    <!-- 动态表单标题输入 -->  
     <div class="form-title-input">    
-        <label for="formTitle">表单标题：</label>    
-        <input type="text" id="formTitle" v-model="formTitle" placeholder="请输入表单标题">  
+        <label>表单标题：</label>    
+        <div style="margin: 5px 0" />
+        <el-input
+        v-model="formTitle"
+        style="width: 400px"
+        autosize
+        type="textarea"
+        placeholder="请输入表单标题"
+        />  
     </div>
 
-    <div class="form-title-input">   
-      <label for="formTitle">截止日期：</label>    
-        <input type="text" id="formTitle" v-model="ddl" placeholder="请按yyyy-mm-dd输入"> 
+    <div class="demo-date-picker">
+    <div class="block">
+      <span class="demonstration">截止日期：</span>
+      <el-date-picker
+        v-model="date"
+        type="date"
+        placeholder="请选择截止日期"
+        :size="size"
+        @change="picked"
+      />
     </div>
-
-    <!-- <div>
-      <p>截止日期</p>
-      <div>
-        <DatePicker v-on:picked="picked"></DatePicker>
-      </div>
-    </div> -->
+  </div>
 
     <div>  
+      <div style="margin: 5px 0" />
     <label for="myCheckbox">  
       <input type="checkbox" id="myCheckbox" v-model="only" />  
       填表人只能填写自己的信息  
     </label>  
   </div> 
 
+  <div style="margin: 8px 0" />
+  <span class="demonstration">可以填写该表单的用户类型</span>
+  <div style="margin: 5px 0" />
   <div>  
-    <p>请选择可以填写表单的用户类型</p>
     <label for="myCheckbox">  
       <input type="checkbox" id="myCheckbox" v-model="roleList[0]" />  
       院长  
@@ -44,16 +63,20 @@
       老师 
     </label> 
   </div> 
+
+  <div style="margin: 10px 0" />
   
-    <!-- 循环渲染已选择的表单项 -->  
-    <div v-for="(field, index) in selectedFields" :key="index" class="form-item">  
-        <input type="text" v-model="field.label" placeholder="表单项名称" class="field-input"> <!-- 表单项名称输入框 -->  
-        <select v-model="field.type" class="field-select">  
-            <option value="text">文本</option> <!-- 表单项类型为文本 -->  
-            <option value="number">数字</option> <!-- 表单项类型为数字 -->  
-            <!-- 更多的选项 -->  
-        </select>  
-        <button @click="removeField(index)" class="remove-btn">-</button> <!-- 移除表单项的按钮 -->  
+    <!-- 循环渲染已选择的表单项 --> 
+    <p class="demonstration">创建表单项</p> 
+    <div v-for="(field, index) in selectedFields" :key="index" class="form-item">
+      <el-input
+        v-model="field.label"
+        style="width: 400px"
+        autosize
+        type="textarea"
+        placeholder="请输入表单项名称"
+        /> 
+        <button @click="removeField(index)" class="remove-btn">-</button> <!-- 移除表单项的按钮 --> 
     </div>  
   
     <!-- 添加表单项的按钮 -->  
@@ -78,6 +101,7 @@
         <button type="submit" class="submit-btn">提交</button>  <!-- 提交表单的按钮 -->  
     </form>  
   </div>
+</div>
 </template>
 
   <script>
@@ -95,12 +119,14 @@
     } ,
     data() {
       return {
-        selectedFields: [{ id: 'field1', label: '字段1', type: 'text' }],
+        selectedFields: [{ id: 'field1', label: '',type:'text' }],
         showForm: false,
         formTitle:'',
         only: 0 ,// 默认不选中 
         roleList:[0,0,0],
-        ddl:"",//2024-06-11
+        ddl:'',//2024-06-11
+        date:new Date(),
+        errorMessage:''
       };
     }, 
     computed: {  
@@ -114,15 +140,22 @@
       },
       ...mapGetters([  
         'username'  
-      ])     
+      ]) ,    
     },
     methods: {
-      picked(year, month, date) {
-				console.warn(`你选择了${year}年${month}月${date}日`)
+      formattedDate() {  
+      const year = this.date.getFullYear();  
+      const month = String(this.date.getMonth() + 1).padStart(2, '0'); // 月份是从 0 开始的，所以需要 +1，并使用 padStart 填充 0  
+      const day = String(this.date.getDate()).padStart(2, '0'); // 使用 padStart 填充 0  
+      return `${year}-${month}-${day}`;  
+    }, 
+      picked() {
+				this.ddl=this.formattedDate();
+        console.log(this.ddl);
 			},
       addField() {
         const id = `field${this.selectedFields.length + 1}`;
-        this.selectedFields.push({ id, label: `字段${this.selectedFields.length + 1}`, type: 'text' });
+        this.selectedFields.push({ id, label: '' ,type:'text'});
       },
       removeField(index) {
         this.selectedFields.splice(index, 1);
@@ -136,9 +169,33 @@
         });
       },
       submitForm() {
+        if (!this.formTitle){
+          this.errorMessage = '请填写表单标题'; 
+          alert(this.errorMessage); 
+          return;  
+        } 
+        if (!this.ddl){
+          this.errorMessage = '请选择截止日期'; 
+          alert(this.errorMessage); 
+          return;  
+        } 
+        var sum=0;
+        for(var i=0;i<this.roleList.length;i++){
+          sum+=this.roleList[i];
+        }
+        if(!sum){
+          this.errorMessage = '请选择可以填写该表的用户类型'; 
+          alert(this.errorMessage); 
+          return;
+        }
+        for (var i = 0; i < this.selectedFields.length; i++) {  
+        if(!this.selectedFields[i].label ){
+          this.errorMessage = '表单项名称不可以为空'; 
+          alert(this.errorMessage); 
+          return;  
+        } 
+        }
         const { username } = this; 
-        console.log(this.only);
-        console.log(this.ddl);
         axios.post('http://localhost:8080/createform', {  
           title:this.formTitle,
           Publisher: username,
@@ -151,12 +208,13 @@
         .then(response => {  
           //console.log('后端返回数据：', response.data); 
           if (response.data.success) { 
-            this.selectedFields=[{ id: 'field1', label: '字段1', type: 'text' }],
+            this.selectedFields=[{ id: 'field1', label: '', type: 'text' }],
             this.showForm= false,
             this.formTitle='',
             this.only= 0 ,
             this.roleList=[0,0,0],
             this.ddl="",
+            this.date=new Date(),
             router.push('/form-create'); 
             alert('表单创建成功！');
           }
@@ -182,6 +240,55 @@
   </script>
 
 <style scoped>
+
+.remove-btn {  
+  margin-left: 160px; /* 左边距 */  
+  padding: 3px 10px; /* 内边距 */  
+  background-color: #6292ff; /* 蓝色背景 */  
+  color: #fff; /* 白色文本 */  
+  border: none; /* 无边框 */  
+  border-radius: 12px; /* 圆角 */  
+  cursor: pointer; /* 鼠标悬停时变为小手图标 */  
+  transition: background-color 0.3s ease; /* 背景色过渡效果 */  
+  margin-top: 7px;
+  font-size: 15px;
+  font-family: "黑体";
+}  
+  
+/* 填写按钮点击后的样式（可选） */  
+.remove-btn:active {  
+  background-color: #0056b3; /* 深蓝色背景 */  
+}
+
+.submit-btn,.add-btn,.generate-btn {  
+  margin-left: 0px; /* 左边距 */  
+  padding: 3px 10px; /* 内边距 */  
+  background-color: #6292ff; /* 蓝色背景 */  
+  color: #fff; /* 白色文本 */  
+  border: none; /* 无边框 */  
+  border-radius: 12px; /* 圆角 */  
+  cursor: pointer; /* 鼠标悬停时变为小手图标 */  
+  transition: background-color 0.3s ease; /* 背景色过渡效果 */  
+  margin-top: 7px;
+  font-size: 15px;
+  font-family: "黑体";
+}  
+  
+/* 填写按钮点击后的样式（可选） */  
+.submit-btn,.add-btn,.generate-btn {  
+  background-color: #0056b3; /* 深蓝色背景 */  
+}
+
+.container {  
+    display: flex;  
+    flex-direction: row;  
+  }  
+    
+  .form-create{  
+    max-width: 400px;
+    margin: auto;
+  }  
+
 .dynamic-form {
   max-width: 400px;
   margin: auto;
@@ -216,7 +323,7 @@
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #6292ff;
   color: #fff;
   border: none;
   border-radius: 5px;

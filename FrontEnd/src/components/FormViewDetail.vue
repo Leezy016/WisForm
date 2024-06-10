@@ -1,6 +1,11 @@
 <template>
   <div class="form-view-detail"> 
     <NavBar /> 
+
+    <div class="welcome">  
+        <img src='@/assets/welcome.png' style="width: 500px; height: 80px;"  />  
+        </div>
+
     <form v-if="this.$store.state.item"  class="form-table">    
         <table>    
             <!-- 循环渲染已选择的表单项为表格形式 -->  
@@ -15,7 +20,7 @@
         </table>    
     </form> 
     <div>
-      <button v-if="changeable" type="view" class="view-btn" @click="goToChange()">修改</button>
+      <button v-if="changeable" type="view" class="view-btn" @click="goToChange()">修 改</button>
     </div> 
 
     <div class="pageination" v-if="sum">
@@ -161,6 +166,24 @@ getContent(id){
 </script>
 
 <style scoped>
+.view-btn {  
+  margin-left: 160px; /* 左边距 */  
+  padding: 6px 10px; /* 内边距 */  
+  background-color: #6292ff; /* 蓝色背景 */  
+  color: #fff; /* 白色文本 */  
+  border: none; /* 无边框 */  
+  border-radius: 12px; /* 圆角 */  
+  cursor: pointer; /* 鼠标悬停时变为小手图标 */  
+  transition: background-color 0.3s ease; /* 背景色过渡效果 */  
+  margin-top: 7px;
+  font-size: 15px;
+  font-family: "黑体";
+}  
+  
+/* 填写按钮点击后的样式（可选） */  
+.view-btn:active {  
+  background-color: #0056b3; /* 深蓝色背景 */  
+}
 .form-view-detail{  
 max-width: 400px;
 margin: auto;

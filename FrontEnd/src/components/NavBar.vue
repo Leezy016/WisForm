@@ -1,6 +1,6 @@
 <template>  
   <nav class = "sidebar">  
-    <ul>  
+    <ul class="permisson">  
       <!-- 使用 v-for 遍历 permissions 并根据权限显示不同的文本 -->  
       <li v-for="permission in permissions" :key="permission">  
         <a v-if="textMap[permission]" :href="linkMap[permission]">  
@@ -54,7 +54,7 @@ export default {
   top: 0;  
   left: 0;  
   bottom: 0; /* 如果你想让侧边栏占满整个页面高度 */  
-  width: 200px; /* 设置侧边栏宽度 */  
+  width: 160px; /* 设置侧边栏宽度 */  
   background-color: #f8f9fa; /* 设置背景颜色 */  
   overflow-y: auto; /* 如果内容太多，允许垂直滚动 */  
   padding-top: 20px; /* 顶部内边距，可选 */  
@@ -68,7 +68,8 @@ export default {
   
 .sidebar li {  
   padding: 10px; /* 设置列表项的内边距 */  
-  border-bottom: 1px solid #ddd; /* 可选，设置列表项之间的分隔线 */  
+  border-bottom: 1px solid #ddd; /* 可选，设置列表项之间的分隔线 */ 
+  text-align: center; 
 }  
   
 /* 如果你希望点击侧边栏链接时不产生默认的蓝色背景 */  
