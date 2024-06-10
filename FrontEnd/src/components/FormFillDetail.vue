@@ -69,7 +69,7 @@
           }
          })
     }, 
-    keyMatch(item, itemValue) {    
+    keyMatch(item, itemValue,index) {    
         console.log(`keymatch for item: ${item}, value: ${itemValue}`);
       axios.post('http://localhost:8080/key-match', {  
         item:item,
@@ -86,7 +86,7 @@
     },
     judge(item,itemValue,index){
       if(this.isKey){
-        this.keyMatch(item,itemValue);
+        this.keyMatch(item,itemValue,index);
         this.isKey=false;
       }
       else{
