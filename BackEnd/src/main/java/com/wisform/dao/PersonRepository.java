@@ -41,7 +41,7 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
     List<String> findPDean(String role);
 
     @Query("MATCH (p:Person)WHERE p.name = $name RETURN p.department")
-    List<String> findDepartmentByName(String username);
+    List<String> findDepartmentByName(String name);
     @Query("MATCH (p:Person)WHERE p.identity = 'teacher' AND ($de IN p.department ) RETURN p.name")
     List<String> findPChair(String de);
 
@@ -51,7 +51,7 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
     @Query("MATCH (p:Person {name: $itemValue1}"+
             "RETURN"+
                 "CASE"+
-                    "WHEN EXISTS(p[$key]) THEN p[$key]"+
+                    "WHEN p[$key] IS NOT NULL THEN p[$key]"+
                     "ELSE NULL"+
                 "END AS itemValue")
     String getItemByKey(String itemValue1, String key);
@@ -64,4 +64,7 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
 
     @Query("MATCH (p:Person)WHERE p.name = $value RETURN p.name")
     String findByKey(String value);
+
+    @Query("MATCH (p:Person{name:$username})SET p.enable=1 ")
+    void ableByName(String username);
 }
