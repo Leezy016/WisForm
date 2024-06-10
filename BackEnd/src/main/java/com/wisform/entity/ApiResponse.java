@@ -10,6 +10,7 @@ public class ApiResponse {
     private String role;
     private List<String> department;
 
+<<<<<<< HEAD
     private List<String> names;
     private long ex;
 
@@ -19,6 +20,8 @@ public class ApiResponse {
         this.names = names;
         this.ex = ex;
     }
+=======
+>>>>>>> 2a7d56f7 (0531创建表单)
 
 
     public ApiResponse(boolean success, String message,List<Object> permissions) {

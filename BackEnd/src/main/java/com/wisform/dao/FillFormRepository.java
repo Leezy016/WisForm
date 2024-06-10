@@ -1,9 +1,14 @@
 package com.wisform.dao;
 
+<<<<<<< HEAD
 import com.wisform.entity.Answer;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
+=======
+import org.springframework.data.neo4j.annotation.Query;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
+>>>>>>> 2a7d56f7 (0531创建表单)
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +17,7 @@ import java.util.List;
 public interface FillFormRepository extends Neo4jRepository<FillFormRepository, Long> {
     @Query("MATCH (f:FFormat) RETURN f.name")
     List<String> formlist();
+<<<<<<< HEAD
 
     @Query("Create (f:Answer{id : $id,title: $title,filler:$filler,item:$item,value:$value}) RETURN f")
     Answer createById(Long id,String title,String filler,List<String> item,List<String> value);
@@ -32,4 +38,6 @@ public interface FillFormRepository extends Neo4jRepository<FillFormRepository, 
 
     @Query("MATCH (n:FFormat) WHERE ANY(id IN n.roleList WHERE id = $role) RETURN n.name AS name")
     List<String> findFFormatByRole(@Param("role") String role);
+=======
+>>>>>>> 2a7d56f7 (0531创建表单)
 }

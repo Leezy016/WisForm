@@ -10,6 +10,7 @@ public class FFormatForm {
     private List<String> Item;
     private List<String> ItemType;
 
+<<<<<<< HEAD
     private List<String>roleList;
 
     private boolean only;
@@ -25,6 +26,15 @@ public class FFormatForm {
         this.ddl = ddl;
         this.roleList = roleList;
         this.only = only;
+=======
+
+    public FFormatForm(String title, String Publisher, List<String> Item,List<String> ItemType) {
+        this.title = title;
+        this.Publisher = Publisher;
+        //this.LanchDate = LanchDate;
+        this.Item = Item;
+        this.ItemType = ItemType;
+>>>>>>> 2a7d56f7 (0531创建表单)
     }
     public String getname() {
         return title;
@@ -43,6 +53,7 @@ public class FFormatForm {
     public List<String> getItemType(){
         return ItemType;
     }
+<<<<<<< HEAD
 
     public String getDDl() {
         return ddl;
@@ -52,5 +63,7 @@ public class FFormatForm {
 
     public boolean getOnly() { return only; }
 
+=======
+>>>>>>> 2a7d56f7 (0531创建表单)
 }
 

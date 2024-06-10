@@ -3,6 +3,7 @@ package com.wisform.entity;
 import java.util.List;
 
 public class ApiFResponse {
+<<<<<<< HEAD
     private boolean success;
     private String message;
     private  String ans;
@@ -71,5 +72,10 @@ public class ApiFResponse {
 
     public boolean getChangeable() {
         return changeable;
+=======
+    private List<String> formlist;
+    public ApiFResponse(List<String> formlist){
+        this.formlist = formlist;
+>>>>>>> 2a7d56f7 (0531创建表单)
     }
 }

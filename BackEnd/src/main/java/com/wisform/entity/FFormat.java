@@ -30,6 +30,7 @@ public class FFormat {
 
     @Property
     private List<String> ItemType;
+<<<<<<< HEAD
 
     @Property
     private List<String> roleList;//权限列表
@@ -40,11 +41,15 @@ public class FFormat {
     private  String  ddl;
 
     public FFormat(List<String> Item,List<String> ItemType,String Publisher,String name,List<String> roleList,Long only,String ddl) {
+=======
+    public FFormat(String name, String Publisher,List<String> Item,List<String> ItemType) {
+>>>>>>> 2a7d56f7 (0531创建表单)
         this.name = name;
         this.Publisher = Publisher;
         //this.LanchDate = LanchDate;
         this.Item = Item;
         this.ItemType = ItemType;
+<<<<<<< HEAD
         this.roleList = roleList;
         this.only = only;
         this.ddl = ddl;
@@ -72,6 +77,8 @@ public class FFormat {
 
     public String getDDl() {
         return ddl;
+=======
+>>>>>>> 2a7d56f7 (0531创建表单)
     }
 }
 
