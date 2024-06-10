@@ -36,7 +36,7 @@ export default {
   props: ['title'],
   data() {  
     return {  
-      sum:10,//总条目数
+      sum:[],//id列表
       nums: [],
       curNum: 5,//当前页数默认1
 
@@ -67,13 +67,8 @@ export default {
     jump(num){
         this.curNum = num;
         this.pagers();
-        this.getContent(num-1);
-        //this.getContent();
+        this.getContent(this.sum[num-1]);
       },//跳转页码
-    // getContent(){
-    //   this.item=['item2'];
-    //   this.content=['2'];
-    // },
     pagers(){
         //重置
         this.nums = [];
@@ -102,7 +97,7 @@ export default {
   })  
   .then(response => {  
     if (response.data.success) {  
-      this.sum=response.data.numm
+      this.sum=response.data.titles
     }
     else {  
       this.getsErrorMessage = response.data.message || '表单获取失败，请稍后再试';  
@@ -118,9 +113,9 @@ export default {
     }
   }); 
 },
-getContent(num){
+getContent(id){
   axios.post('http://localhost:8080/viewform/getContent', {  
-    num:num,
+    num:id,
   })  
   .then(response => {  
     if (response.data.success) {  

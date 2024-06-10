@@ -40,7 +40,7 @@ export default {
         })  
         .then(response => {  
           if (response.data.success) {  
-            this.titles=response.data.Createlist
+            this.titles=response.data.titles
           }
           else {  
             this.getErrorMessage = response.data.message || '表单列表获取失败，请稍后再试';  
