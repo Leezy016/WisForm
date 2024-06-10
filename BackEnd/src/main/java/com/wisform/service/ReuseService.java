@@ -96,10 +96,12 @@ public class ReuseService {
             System.out.print("Ans: "+ans+'\n');
             if(ans!=null){  //如果返回ans非空说明有这个属性，添加到对应列表
                 personlist2.add(key);
+                personlistValue2.add("");
             }
             return ans;
         }else{
             personlist.add(key);
+            personlistValue.add("");
             return null;
         }
 
@@ -113,12 +115,16 @@ public class ReuseService {
             String ans = projectRepository.getItemByKey(itemValue2,key);
             if(ans!=null){
                 projectlist2.add(key);
+                projectlistValue2.add("");
             }
             System.out.print("ans: "+ans+"\n");
             return ans;
         }else{
+            if(projectlist.contains(key)){
+                return null;
+            }
             projectlist.add(key);
-            System.out.print("add success to projectList\n");
+            projectlistValue.add("");
             return null;
         }
     }
@@ -132,11 +138,15 @@ public class ReuseService {
         }
         // 输出结果
         if (index != -1) {
-            personlistValue.add(index,itemValue);
+            if((personlistValue.size()>index) && (personlistValue.get(index)!=null)){
+                personlistValue.set(index,itemValue);
+            }else{
+                personlistValue.add(index,itemValue);
+            }
         } else {
             index = personlist2.indexOf(key);
             if(index !=-1){
-                personlistValue2.add(index,itemValue);
+                personlistValue2.set(index,itemValue);
             }
         }
     }
@@ -144,19 +154,23 @@ public class ReuseService {
     public void saveProCouple(String key,String itemValue){
         System.out.print("get in saveProCouple\n");
         int index;
+        System.out.print(projectlist+"\n");
+        System.out.print(projectlistValue+"\n");
         if(projectlist!=null){
             index = projectlist.indexOf(key);
         }else{
             index=0;
         }
+        System.out.print(index+"\n");
         // 输出结果
         if (index != -1) {
+            projectlistValue.set(index,itemValue);
 
-            projectlistValue.add(index,itemValue);
         } else {
             index = projectlist2.indexOf(key);
             if(index !=-1){
-                projectlistValue2.add(index,itemValue);
+                projectlistValue2.set(index,itemValue);
+
             }
         }
     }
