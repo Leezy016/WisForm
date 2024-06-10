@@ -20,7 +20,8 @@
       <tbody>  
         <tr v-for="(name,index) in names" :key="index" >  
           <td>{{ name }}</td>  
-          <button type="view" class="view-btn" @click="deleteUser(name)">查看</button>
+          <button type="view" class="view-btn" @click="freezeUser(name)">冻结</button>
+          <button type="view" class="view-btn" @click="unfreezeUser(name)">解冻</button>
         </tr>  
       </tbody>  
     </table> 
@@ -66,16 +67,16 @@ export default {
           }
         });  
     },  
-    deleteUser(username) {  
-      axios.post('http://localhost:8080/manage/action', {  
+    freezeUser(username) {  
+      axios.post('http://localhost:8080/manage/action1', {  
         username:username
         })  
         .then(response => {  
           if (response.data.success) {  
-            alert('删除用户成功');
+            alert('账号冻结成功');
           }
           else {  
-            this.deleteErrorMessage = response.data.message || '删除用户失败，请稍后再试';  
+            this.deleteErrorMessage = response.data.message || '账号冻结失败，请稍后再试';  
           }
          })  
         .catch(error => {  
@@ -83,10 +84,31 @@ export default {
             this.deleteErrorMessage = error.response.data;   
           }
           else {
-            this.deleteErrorMessage = '删除用户失败，请稍后再试';
+            this.deleteErrorMessage = '账号冻结失败，请稍后再试';
           }
         });
-    }  
+    } ,
+    unfreezeUser(username) {  
+      axios.post('http://localhost:8080/manage/action2', {  
+        username:username
+        })  
+        .then(response => {  
+          if (response.data.success) {  
+            alert('账号解冻成功');
+          }
+          else {  
+            this.deleteErrorMessage = response.data.message || '账号解冻失败，请稍后再试';  
+          }
+         })  
+        .catch(error => {  
+          if (error.response) { 
+            this.deleteErrorMessage = error.response.data;   
+          }
+          else {
+            this.deleteErrorMessage = '账号解冻失败，请稍后再试';
+          }
+        });
+    }   
   },  
   created() {  
     this.getNames(); // 在组件创建时获取数据  

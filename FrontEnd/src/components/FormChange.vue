@@ -17,9 +17,6 @@
         v-model="this.$store.state.content[index]"
         style="width: 400px"
         autosize
-        type="textarea"
-        @focus="keyJudge(item[index],content[index],index)"
-        @blur="judge(item[index],content[index],index)"
         /> 
         <div style="margin: 15px 0" />
         </div>  
