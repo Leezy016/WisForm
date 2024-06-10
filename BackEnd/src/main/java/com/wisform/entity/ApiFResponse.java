@@ -10,6 +10,8 @@ public class ApiFResponse {
     private List<String> Item;
     private List<String> ItemValue;
 
+    private boolean changeable;
+
     private int num;
 
     public ApiFResponse(boolean success, String message,int num){
@@ -82,12 +84,6 @@ public class ApiFResponse {
     public ApiFResponse(boolean success, String message){
         this.success = success;
         this.message = message;
-    }
-
-    public  ApiFResponse(boolean success, String message,String ans){
-        this.success = success;
-        this.message = message;
-        this.ans = ans;
     }
 
     public boolean getChangeable() {

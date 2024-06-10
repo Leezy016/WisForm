@@ -84,6 +84,7 @@ public class ViewFormController {
         String formatname = (String) requestBody.get("formatname");
         List<String> Answerlist = new ArrayList<>();
         Answerlist = answerRepository.findAnswersByFormatname(formatname);
+
         ApiFResponse response1 = new ApiFResponse(true,"获取回答个数成功",Answerlist);
         return ResponseEntity.ok(response1);
     }
@@ -153,15 +154,5 @@ public class ViewFormController {
             ApiFResponse response = new ApiFResponse(false,"修改失败！");
             return ResponseEntity.ok().body(response);
         }
-    }
-    @PostMapping("/search")//未
-    public ResponseEntity<?> search(@RequestBody Map<String, Object> requestBody) {
-        String siterm = (String) requestBody.get("title");
-        System.out.print(siterm+"\n");
-        List<String> ans = answerRepository.findValuesByItemContaining(siterm);
-        System.out.print(ans+"\n");
-        ApiFResponse response1 = new ApiFResponse(true,"搜索成功",ans);
-        return ResponseEntity.ok(response1);
-
     }
 }

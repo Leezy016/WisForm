@@ -26,9 +26,6 @@ public class AnswerForm {
         this.Item = Item;
         this.ItemValue = ItemValue;
     }
-    public AnswerForm(String title){
-        this.title = title;
-    }
     public String getTitle() {
         return title;
     }
