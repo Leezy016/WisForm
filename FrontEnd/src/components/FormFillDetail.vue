@@ -73,8 +73,16 @@
         console.log(`keymatch for item: ${item}, value: ${itemValue}`);
       axios.post('http://localhost:8080/key-match', {  
         item:item,
-        itemValue:itemValue
+        itemValue:itemValue,
+        title:this.title,
+        username:this.$store.state.username,
         }) 
+        .then(response => {  
+          if (!response.data.success) {  
+            this.content[index]=this.$store.state.username;
+            alert("该表只能填写本人相关信息");
+          }
+         })
     },
     judge(item,itemValue,index){
       if(this.isKey){
