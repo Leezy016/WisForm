@@ -30,12 +30,24 @@ public class FFormat {
 
     @Property
     private List<String> ItemType;
-    public FFormat(List<String> Item,List<String> ItemType,String Publisher,String name ) {
+
+    @Property
+    private List<String> roleList;//权限列表
+    @Property
+    private Long only;//只能自己填
+
+    @Property
+    private  String  ddl;
+
+    public FFormat(List<String> Item,List<String> ItemType,String Publisher,String name,List<String> roleList,Long only,String ddl) {
         this.name = name;
         this.Publisher = Publisher;
         //this.LanchDate = LanchDate;
         this.Item = Item;
         this.ItemType = ItemType;
+        this.roleList = roleList;
+        this.only = only;
+        this.ddl = ddl;
     }
     public FFormat(String name){
         this.name = name;
@@ -54,6 +66,10 @@ public class FFormat {
 
     public String getName() {
         return name;
+    }
+
+    public String getDDl() {
+        return ddl;
     }
 }
 

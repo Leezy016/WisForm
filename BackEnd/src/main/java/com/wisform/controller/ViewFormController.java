@@ -4,19 +4,26 @@ import com.wisform.dao.AnswerRepository;
 import com.wisform.dao.FFormatRepository;
 import com.wisform.dao.FillFormRepository;
 import com.wisform.dao.PersonRepository;
+import com.wisform.entity.Answer;
+import com.wisform.entity.AnswerForm;
 import com.wisform.entity.ApiFResponse;
 import com.wisform.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/viewform")
 public class ViewFormController {
+
+    public static String globals;
     @Autowired
     private AnswerService answerService;
     @Autowired
@@ -24,11 +31,17 @@ public class ViewFormController {
     @Autowired
      private AnswerRepository answerRepository;
     @Autowired
+    private FillFormRepository fillFormRepository;
+    @Autowired
     private PersonRepository personRepository;
     @PostMapping("/select")
     public ResponseEntity<?> select(@RequestBody Map<String, Object> requestBody) {//不知道和前端对不对应
         String num = (String) requestBody.get("num");
         String name = (String) requestBody.get("name");
+<<<<<<< HEAD
+=======
+        globals = num;
+>>>>>>> da1d377a (0605lhq)
         //System.out.print(num);
         //System.out.print(name);
         if (num.equals("1")) {//发布的
@@ -46,7 +59,7 @@ public class ViewFormController {
         } else {//权限内可查看到
             String  identity = personRepository.findIdentityByName(name);
             //叫什么名字
-            if (identity.equals("chair")){
+            if (identity.equals("dean")){
                 List<String> AllFormatlist = new ArrayList<>();
                 AllFormatlist = fFormatRepository.findAllNames();
                 ApiFResponse response = new ApiFResponse(true,"获取所有问卷列表成功",AllFormatlist);
@@ -63,7 +76,6 @@ public class ViewFormController {
                 ApiFResponse response = new ApiFResponse(true,"获取所有问卷列表成功",Createlist);
                 return ResponseEntity.ok().body(response);
             }
-
         }
     }
     //
@@ -72,6 +84,7 @@ public class ViewFormController {
         String formatname = (String) requestBody.get("formatname");
         List<String> Answerlist = new ArrayList<>();
         Answerlist = answerRepository.findAnswersByFormatname(formatname);
+
         ApiFResponse response1 = new ApiFResponse(true,"获取回答个数成功",Answerlist);
         return ResponseEntity.ok(response1);
     }
@@ -81,6 +94,7 @@ public class ViewFormController {
     public ResponseEntity<?> getContent(@RequestBody Map<String, Object> requestBody) {
         String numm = (String) requestBody.get("num");
         String title = (String) requestBody.get("title");
+<<<<<<< HEAD
         System.out.print(numm);
         long num = Long.parseLong(numm);
         List<String> Itemlist = new ArrayList<>();
@@ -93,8 +107,52 @@ public class ViewFormController {
         }else{
             return ResponseEntity.ok().body(new ApiFResponse(false,"获取表单失败!"));
         }
+=======
+        long num;
+        //System.out.print(numm);
+        if(numm!=null){
+            num = Long.parseLong(numm);
+            List<String> Itemlist = new ArrayList<>();
+            Itemlist = answerRepository.findItemById(num,title);
+            List<String> Valuelist = new ArrayList<>();
+            Valuelist = answerRepository.findValueById(num,title);
+            LocalDate ddl = answerRepository.checkdate(title);//查
+            LocalDate time = LocalDate.now();//转为Date型
+            //System.out.println("Current date: " + ddl); // 只打印 LocalDate
+
+            if(Itemlist!= null){
+                if(globals.equals("2") ){//还需加入ddl的判断
+                    ApiFResponse response = new ApiFResponse(true,"获取回答成功",Itemlist, Valuelist , time.isBefore(ddl));
+                    System.out.print(response.getChangeable());
+                    return ResponseEntity.ok().body(response);
+                }else{
+                    ApiFResponse response = new ApiFResponse(true,"获取回答成功",Itemlist, Valuelist , time.isBefore(ddl));
+                    System.out.print(response.getChangeable());
+                    return ResponseEntity.ok().body(response);
+                }
+            }else{
+                return ResponseEntity.ok().body(new ApiFResponse(false,"获取表单失败!"));
+            }
+        }else{
+            return ResponseEntity.ok().body(new ApiFResponse(false,"获取表单空!"));
+        }
+
+
+>>>>>>> da1d377a (0605lhq)
     }
 
-
-
+    @PostMapping("/form-change")
+    public ResponseEntity<?> formchange(@RequestBody AnswerForm answerForm) {
+        Long id = answerForm.getId();
+        List<String> item = answerForm.getItem();
+        List<String> itemvalue = answerForm.getValue();
+        Answer answer = new Answer(id,item,itemvalue);
+        if(answerService.converbyid(id,item,itemvalue)){
+            ApiFResponse response = new ApiFResponse(true,"修改成功！");
+            return ResponseEntity.ok().body(response);
+        }else{
+            ApiFResponse response = new ApiFResponse(false,"修改失败！");
+            return ResponseEntity.ok().body(response);
+        }
+    }
 }
