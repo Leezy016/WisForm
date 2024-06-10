@@ -66,6 +66,7 @@
         .then(response => {  
           if (response.data.success) {  
             this.content[index]=response.data.ans
+    
           }
          })
     }, 
@@ -94,7 +95,6 @@
       }
     },
     keyJudge(item,itemValue,index){  
-      console.log(item);
       for (let i = 0; i < this.keys.length; i++) {   
         if (this.keys[i] === item) {  
           this.isKey = true;  
