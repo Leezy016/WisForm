@@ -5,6 +5,7 @@ import java.util.List;
 public class ApiFResponse {
     private boolean success;
     private String message;
+    private  String ans;
     private List<String> titles;
     private List<String> Item;
     private List<String> ItemValue;
@@ -59,9 +60,20 @@ public class ApiFResponse {
         return Item;
     }
 
+    public String getAns(){
+        return ans;
+    }
+
+
     public ApiFResponse(boolean success, String message){
         this.success = success;
         this.message = message;
+    }
+
+    public  ApiFResponse(boolean success, String message,String ans){
+        this.success = success;
+        this.message = message;
+        this.ans = ans;
     }
 
     public boolean getChangeable() {

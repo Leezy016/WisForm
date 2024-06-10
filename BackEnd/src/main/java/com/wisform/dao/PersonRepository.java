@@ -21,7 +21,7 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
     Optional<Person> findByNameAndIdentity(String name, String identity);
     @Query("MATCH (p:Person) WHERE p.name = $username RETURN p")
     Person findByName(String username);
-    @Query("CREATE (p:Person {name: $name, identity: $identity, passwd: $passwd,department: $department}) RETURN p")
+    @Query("CREATE (p:Person {name: $name, identity: $identity, passwd: $passwd,department: $department,enable: 1}) RETURN p")
     Person saveUser(@Param("name") String name, @Param("identity") String identity, @Param("passwd") String passwd,@Param("department") List<String> department);
 
     //@Query("MATCH (n:roleControl) RETURN n[$a] AS value")
@@ -36,4 +36,32 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
     //新 由身份查人名
     @Query("MATCH (p:Person) WHERE p.identity = $identity RETURN p.name")
     List<String> findNameByIdentity(String identity);
+
+    @Query("MATCH (p:Person)WHERE p.identity <> $role RETURN p.name")
+    List<String> findPDean(String role);
+
+    @Query("MATCH (p:Person)WHERE p.name = $name RETURN p.department")
+    List<String> findDepartmentByName(String username);
+    @Query("MATCH (p:Person)WHERE p.identity = 'teacher' AND ($de IN p.department ) RETURN p.name")
+    List<String> findPChair(String de);
+
+    @Query("MATCH (p:Person{name:$username})SET p.enable=0 ")
+    void unableByName(String username);
+
+    @Query("MATCH (p:Person {name: $itemValue1}"+
+            "RETURN"+
+                "CASE"+
+                    "WHEN EXISTS(p[$key]) THEN p[$key]"+
+                    "ELSE NULL"+
+                "END AS itemValue")
+    String getItemByKey(String itemValue1, String key);
+    @Query("MATCH (p:Person {name: $name}) " +
+            "SET p.$key = $value ")
+    void updatePerson(@Param("name") String name, @Param("key") String key, @Param("value") Object value);
+
+    @Query("CREATE(n:Person)set n.name = $itemValue")
+    void createPerson(String itemValue);
+
+    @Query("MATCH (p:Person)WHERE p.name = $value RETURN p.name")
+    String findByKey(String value);
 }

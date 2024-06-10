@@ -28,4 +28,12 @@ public interface  AnswerRepository extends Neo4jRepository<Answer, Long> {
 
     @Query("MATCH (a:Answer {id:$id})set a.item = $item,a.value = $itemValue ")
     void coverById(Long id, List<String> item, List<String> itemValue);
+
+    @Query("MATCH (a:Answer) " +
+            "WITH a.item AS items, a.value AS values " +
+            "UNWIND RANGE(0, SIZE(items) - 1) AS index " +
+            "WITH items[index] AS item, values[index] AS correspondingValue " +
+            "WHERE item CONTAINS $siterm " +
+            "RETURN correspondingValue")
+    List<String> findValuesByItemContaining(@Param("siterm") String siterm);
 }
