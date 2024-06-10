@@ -1,5 +1,6 @@
 package com.wisform.controller;
 
+import com.wisform.dao.FFormatRepository;
 import com.wisform.entity.ApiFResponse;
 import com.wisform.entity.ApiResponse;
 import com.wisform.entity.MappingTable_Person;
@@ -22,21 +23,45 @@ public class ReuseController {
 
     @Autowired
     private ReuseService reuseService;
+    @Autowired
+    private FFormatRepository fFormatRepository;
     @PostMapping("/key-match")
-    public void keymatch(@RequestBody Map<String, Object> requestBody){
+    public ResponseEntity<?> keymatch(@RequestBody Map<String, Object> requestBody){
         System.out.print("get in keymatch\n");
         String item = (String) requestBody.get("item");
-        String itemValue = (String) requestBody.get("itemValue");//??对接口
+        System.out.print(item+"\n");
+        String title = (String) requestBody.get("title");
+        System.out.print(title+"\n");
+        String username = (String) requestBody.get("username");
+        System.out.print(username+"\n");
+        String itemValue = (String) requestBody.get("itemValue");
         MappingTable_Person mappingTablePerson = new MappingTable_Person();
         MappingTable_Project mappingTableProject = new MappingTable_Project();
         String key = mappingTablePerson.KeyCheck(item);
-        System.out.print("personkey："+key+" value\n"+itemValue+"\n");
+//System.out.print("personkey："+key+" value\n"+itemValue+"\n");
         if(key!=null){
-            reuseService.personKey(key,itemValue);
+            String only = fFormatRepository.OnlyByName(title);
+            System.out.print(only);
+            if(only!=null){
+                if(itemValue.equals(username)){
+                    reuseService.personKey(key,itemValue);
+                    ApiFResponse response = new ApiFResponse(true,"");
+                    return ResponseEntity.ok().body(response);
+                }else{
+                    ApiFResponse response = new ApiFResponse(false,"");
+                    return ResponseEntity.ok().body(response);
+                }
+            }else{
+                reuseService.personKey(key,itemValue);
+                ApiFResponse response = new ApiFResponse(true,"");
+                return ResponseEntity.ok().body(response);
+            }
         }else{
             key = mappingTableProject.KeyCheck(item);//项目匹配
             System.out.print("projectkey："+key+" value\n"+itemValue+"\n");
             reuseService.projectKey(key,itemValue);
+            ApiFResponse response = new ApiFResponse(true,"");
+            return ResponseEntity.ok().body(response);
         }
     }
 

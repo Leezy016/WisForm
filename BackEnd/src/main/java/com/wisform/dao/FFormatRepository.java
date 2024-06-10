@@ -35,4 +35,7 @@ public interface FFormatRepository extends Neo4jRepository<FFormatRepository, Lo
     //xin 由人名查找填过的问卷,FILLFORM
     @Query("MATCH (p:Person {name: $name})-[:CONTRIBUTE]->(f:FFormat) RETURN f.name AS FFormatName")
     List<String> findFormatByPersonName(@Param("name") String name);
+
+    @Query("MATCH(f:FFormat{name:$title}) RETURN f.only")
+    String OnlyByName(String title);
 }
