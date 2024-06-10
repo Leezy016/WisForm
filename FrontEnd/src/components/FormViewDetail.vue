@@ -1,11 +1,6 @@
 <template>
   <div class="form-view-detail"> 
     <NavBar /> 
-
-    <div class="welcome">  
-        <img src='@/assets/welcome.png' style="width: 500px; height: 80px;"  />  
-        </div>
-
     <form v-if="this.$store.state.item"  class="form-table">    
         <table>    
             <!-- 循环渲染已选择的表单项为表格形式 -->  
@@ -14,13 +9,13 @@
                   <label>{{ itemName }}</label> 
                 </td>
                 <td>
-                  <label>{{ content[index] }}</label> 
+                  <label>{{ this.$store.state.content[index] }}</label> 
                 </td>        
             </tr>    
         </table>    
     </form> 
     <div>
-      <button v-if="changeable" type="view" class="view-btn" @click="goToChange()">修 改</button>
+      <button v-if="changeable" type="view" class="view-btn" @click="goToChange()">修改</button>
     </div> 
 
     <div class="pageination" v-if="sum">
@@ -49,11 +44,9 @@ export default {
       nums: [],
       curNum: 1,//当前页数默认1
 
-      item: [],
-      content:[],
       getcErrorMessage:'',
       getsErrorMessage:'', 
-      changeable:false,
+      changeable:1,
     };  
   }, 
   components: {  
@@ -61,7 +54,7 @@ export default {
   } ,
   methods:{
     goToChange() {  
-      this.$router.push({ name: 'FormChange', params: { id: this.sum[this.curNum - 1],title:this.title} });  
+      this.$router.push({ name: 'FormChange', params: { id: this.sum[this.curNum - 1]} });  
     } ,
     pageUp(state){
       if (this.curNum - 1 != 0 && state == 1) {
@@ -132,13 +125,14 @@ getContent(id){
   //console.log(id),
   axios.post('http://localhost:8080/viewform/getContent', {  
     num:id,
-    title:this.title
+    title:this.title,
   })  
   .then(response => {  
     if (response.data.success) {  
-      console.log("success"),
-      this.item=response.data.item,
-      this.content=response.data.itemValue
+      //console.log("success"),
+      this.$store.commit('SET_ITEM', response.data.item),
+      this.$store.commit('SET_CONTENT', response.data.itemValue)
+      //changeable:
     }
     else {  
       this.getcErrorMessage = response.data.message || '表单获取失败，请稍后再试';  
