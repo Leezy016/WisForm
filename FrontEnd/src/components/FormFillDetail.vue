@@ -66,6 +66,7 @@
         .then(response => {  
           if (response.data.success) {  
             this.content[index]=response.data.ans
+    
           }
          })
     }, 
@@ -81,11 +82,12 @@
           if (!response.data.success) {  
             this.content[index]=this.$store.state.username;
             alert("该表只能填写本人相关信息");
+            this.keyMatch(item,this.$store.state.username,index);
           }
          })
     },
     judge(item,itemValue,index){
-      if(this.isKey){
+      if(this.isKey&&itemValue){
         this.keyMatch(item,itemValue,index);
         this.isKey=false;
       }
@@ -94,7 +96,6 @@
       }
     },
     keyJudge(item,itemValue,index){  
-      console.log(item);
       for (let i = 0; i < this.keys.length; i++) {   
         if (this.keys[i] === item) {  
           this.isKey = true;  
@@ -111,10 +112,7 @@
       })  
       .then(response => {  
         if (response.data.success) { 
-          //console.log('表单内容获取成功'); 
           this.item=response.data.item;
-          console.log("item1="),
-          console.log(this.item)
         }
         else {  
           this.getErrorMessage = response.data.message || '表单内容获取失败，请稍后再试';  
