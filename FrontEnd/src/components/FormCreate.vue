@@ -16,7 +16,14 @@
     <div class="form-title-input">    
         <label for="formTitle">表单标题：</label>    
         <input type="text" id="formTitle" v-model="formTitle" placeholder="请输入表单标题">  <!-- 绑定到Vue实例的formTitle属性 -->  
-    </div>   
+    </div>
+
+    <!-- <div>
+      <h4>基于Vue.2X的日期选择器</h4>
+        <div style="width: 502px;">
+          <DatePicker v-on:picked="picked"></DatePicker>
+        </div>
+    </div> -->
 
     <div>  
     <label for="myCheckbox">  
@@ -83,6 +90,7 @@
   import { mapGetters } from 'vuex';
   import axios from 'axios';
   import router from '../router';
+  import dayjs from 'dayjs';
   //import DatePicker from './DatePicker.vue';
   
   export default {
@@ -97,7 +105,10 @@
         showForm: false,
         formTitle:'',
         only: 0 ,// 默认不选中 
-        roleList:[0,0,0]
+        roleList:[0,0,0],
+        ddl:"",//2024-06-11
+        minDate: dayjs(new Date()),
+        maxDate: dayjs(new Date()).add(20, 'day'),
       };
     }, 
     computed: {  
@@ -114,15 +125,8 @@
       ]) ,    
     },
     methods: {
-      formattedDate() {  
-      const year = this.date.getFullYear();  
-      const month = String(this.date.getMonth() + 1).padStart(2, '0'); // 月份是从 0 开始的，所以需要 +1，并使用 padStart 填充 0  
-      const day = String(this.date.getDate()).padStart(2, '0'); // 使用 padStart 填充 0  
-      return `${year}-${month}-${day}`;  
-    }, 
-      picked() {
-				this.ddl=this.formattedDate();
-        console.log(this.ddl);
+      picked(year, month, date) {
+				console.warn(`你选择了${year}年${month}月${date}日`)
 			},
       addField() {
         const id = `field${this.selectedFields.length + 1}`;
@@ -168,14 +172,15 @@
         }
         const { username } = this; 
         console.log(this.only);
-        console.log(this.roleList);
+        console.log(this.ddl);
         axios.post('http://localhost:8080/createform', {  
           title:this.formTitle,
           Publisher: username,
           Item: this.labelArray,  
           ItemType: this.typeArray,  
           only:this.only,
-          roleList:this.roleList
+          roleList:this.roleList,
+          ddl:this.ddl
         })  
         .then(response => {  
           //console.log('后端返回数据：', response.data); 
