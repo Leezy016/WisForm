@@ -24,18 +24,18 @@ public class ReuseController {
     private ReuseService reuseService;
     @PostMapping("/key-match")
     public void keymatch(@RequestBody Map<String, Object> requestBody){
-        //System.out.print("get in keymatch\n");
+        System.out.print("get in keymatch\n");
         String item = (String) requestBody.get("item");
         String itemValue = (String) requestBody.get("itemValue");//??对接口
         MappingTable_Person mappingTablePerson = new MappingTable_Person();
         MappingTable_Project mappingTableProject = new MappingTable_Project();
         String key = mappingTablePerson.KeyCheck(item);
-        //System.out.print("personkey："+key+" value\n"+itemValue+"\n");
+        System.out.print("personkey："+key+" value\n"+itemValue+"\n");
         if(key!=null){
             reuseService.personKey(key,itemValue);
         }else{
             key = mappingTableProject.KeyCheck(item);//项目匹配
-            //System.out.print("projectkey："+key+" value\n"+itemValue+"\n");
+            System.out.print("projectkey："+key+" value\n"+itemValue+"\n");
             reuseService.projectKey(key,itemValue);
         }
     }
@@ -50,18 +50,21 @@ public class ReuseController {
         //System.out.print("personkey_："+key+" value_： "+itemValue+"\n");
         if(itemValue==null){
             System.out.print("get in auto match\n");
+
             if(key!=null){
+                System.out.print("personkey_："+key+"\n");
                 ans = reuseService.personMatch(key);
                 ApiFResponse response = new ApiFResponse(true,"复用成功！",ans);
                 return ResponseEntity.ok().body(response);
-            }else{
+            }else {
                 key = mappingTableProject.KeyCheck(item);//项目匹配
-                //System.out.print("projectkey_："+key+"\n");
+                System.out.print("projectkey_：" + key + "\n");
                 ans = reuseService.projectMatch(key);
-                ApiFResponse response = new ApiFResponse(true,"复用成功！",ans);
+                ApiFResponse response = new ApiFResponse(true, "复用成功！", ans);
                 return ResponseEntity.ok().body(response);
             }
-        }else{
+        }
+        else{
             //System.out.print("savakey: "+key+" saveValue: "+itemValue+"\n");
             if(key!=null){
                 reuseService.savePerCouple(key,itemValue);

@@ -21,6 +21,7 @@ public class ManageController {
     public ResponseEntity<?> getmanagelist(@RequestBody Map<String, Object> requestBody) {
         String username = (String) requestBody.get("username");
         String role = personRepository.findIdentityByName(username);
+        System.out.print("role: "+role+"\n");
         List<String> names = new ArrayList<>();
         if(role!=null && role.equals("dean")){
             names = personRepository.findPDean("dean");
@@ -28,6 +29,7 @@ public class ManageController {
             return ResponseEntity.ok().body(response);
         }else if(role.equals("chair")){
             List<String> department = personRepository.findDepartmentByName(username);
+            System.out.print(department+"\n");
             String de = department.get(0);
             names = personRepository.findPChair(de);
             ApiResponse response = new ApiResponse(true, "获取人员列表成功！",names,1);
@@ -39,11 +41,18 @@ public class ManageController {
 
     }
 
-    @PostMapping("/action")
+    @PostMapping("/action1")
     public ResponseEntity<?> manage(@RequestBody Map<String, Object> requestBody){
         String username = (String) requestBody.get("username");
         personRepository.unableByName(username);
         ApiResponse response = new ApiResponse(true, "冻结人员成功！");
+        return ResponseEntity.ok().body(response);
+    }
+    @PostMapping("/action2")
+    public ResponseEntity<?> manage2(@RequestBody Map<String, Object> requestBody){
+        String username = (String) requestBody.get("username");
+        personRepository.ableByName(username);
+        ApiResponse response = new ApiResponse(true, "解冻人员成功！");
         return ResponseEntity.ok().body(response);
     }
 

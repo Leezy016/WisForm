@@ -12,7 +12,7 @@ public interface ProjectRepository extends Neo4jRepository<ProjectRepository, Lo
     @Query("MATCH (p:Project {name: $itemValue1})\n" +
             "RETURN\n" +
             "\tCASE\n" +
-            "\tWHEN EXISTS(p[$key]) THEN p[$key]\n" +
+            "\tWHEN p[$key] IS NOT NULL THEN p[$key]\n" +
             "\tELSE NULL\n" +
             "END AS itemValue")
     String getItemByKey(String itemValue1, String key);

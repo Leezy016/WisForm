@@ -106,9 +106,9 @@ public class ReuseService {
     }
 
     public String projectMatch(String key){
-        //System.out.print("get in projectMatch\n");
-        //System.out.print("key普通:"+key+"\n");
-        //System.out.print("flag2: "+flag2);
+        System.out.print("get in projectMatch\n");
+        System.out.print("key普通:"+key+"\n");
+        System.out.print("flag2: "+flag2);
         if(flag2){
             String ans = projectRepository.getItemByKey(itemValue2,key);
             if(ans!=null){
