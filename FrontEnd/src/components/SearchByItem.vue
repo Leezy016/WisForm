@@ -46,13 +46,15 @@ export default {
     }, 
     methods:{
         search(){
+          console.log(this.item)
         this.title=this.item;
-        axios.post('http://localhost:8080/search', {  
+        axios.post('http://localhost:8080/viewform/search', {  
         title:this.item
         })  
         .then(response => {  
           if (response.data.success) { 
-            this.content=response.data.ans
+            this.content=response.data.titles
+            console.log(this.content);
           }
           else {  
             this.getErrorMessage = response.data.message || '信息获取失败，请稍后再试';  

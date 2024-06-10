@@ -17,11 +17,11 @@
         v-model="content[index]"
         style="width: 400px"
         autosize
-        type="textarea"
         @focus="keyJudge(item[index],content[index],index)"
         @blur="judge(item[index],content[index],index)"
         
         />
+
         <div style="margin: 15px 0" />
       </div>  
 
@@ -44,7 +44,7 @@
       getErrorMessage:'',
       submitErrorMessage:'',
       matchErrorMessage:'',
-      keys:["姓名","作者姓名","项目名称","论文标题"],
+      keys:["姓名", "名字","作者姓名","作者","作者名","论文标题", "标题","论文名称","名称","成果名称","获奖名称","项目名称","课程名称","论文","专著","专利","获奖","专著名称","专利名称","获奖名称"],
       selectedValue: '',
       isKey:false,
     };  
@@ -70,7 +70,7 @@
          })
     }, 
     keyMatch(item, itemValue) {    
-        console.log(`sent item: ${item}, value: ${itemValue}`);
+        console.log(`keymatch for item: ${item}, value: ${itemValue}`);
       axios.post('http://localhost:8080/key-match', {  
         item:item,
         itemValue:itemValue
@@ -86,6 +86,7 @@
       }
     },
     keyJudge(item,itemValue,index){  
+      console.log(item);
       for (let i = 0; i < this.keys.length; i++) {   
         if (this.keys[i] === item) {  
           this.isKey = true;  

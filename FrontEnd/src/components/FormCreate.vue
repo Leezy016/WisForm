@@ -20,7 +20,6 @@
         v-model="formTitle"
         style="width: 400px"
         autosize
-        type="textarea"
         placeholder="请输入表单标题"
         />  
     </div>
@@ -73,7 +72,6 @@
         v-model="field.label"
         style="width: 400px"
         autosize
-        type="textarea"
         placeholder="请输入表单项名称"
         /> 
         <button @click="removeField(index)" class="remove-btn">-</button> <!-- 移除表单项的按钮 --> 
@@ -188,8 +186,8 @@
           alert(this.errorMessage); 
           return;
         }
-        for (var i = 0; i < this.selectedFields.length; i++) {  
-        if(!this.selectedFields[i].label ){
+        for (var j = 0; j < this.selectedFields.length; j++) {  
+        if(!this.selectedFields[j].label ){
           this.errorMessage = '表单项名称不可以为空'; 
           alert(this.errorMessage); 
           return;  
