@@ -8,7 +8,9 @@ const store = createStore({
       permissions:[1,3],
       department:[],
       role:'',
-      username:''
+      username:'',
+      item:[],
+      content:[]
       }
   },  
   getters: {  
@@ -26,6 +28,12 @@ const store = createStore({
     } ,
     SET_USERNAME(state, username) {  
       state.username = username;  
+    },
+    SET_ITEM(state, item) {  
+      state.item = item;  
+    },
+    SET_CONTENT(state, content) {  
+      state.content = content;  
     }
   },  
   actions: {  
@@ -42,7 +50,9 @@ const store = createStore({
           permissions: val.permissions, 
           department:val.department,
           role:val.role,
-          username:val.username
+          username:val.username,
+          item:val.item,
+          content:val.content
           // 可以添加其他需要持久化的字段  
         }  
       }  
