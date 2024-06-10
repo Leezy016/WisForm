@@ -14,19 +14,41 @@
 
   <div class="dynamic-form">  
     <div class="form-title-input">    
-        <label for="formTitle">表单标题：</label>    
-        <input type="text" id="formTitle" v-model="formTitle" placeholder="请输入表单标题">  <!-- 绑定到Vue实例的formTitle属性 -->  
-    </div>   
+        <label>表单标题：</label>    
+        <div style="margin: 5px 0" />
+        <el-input
+        v-model="formTitle"
+        style="width: 400px"
+        autosize
+        placeholder="请输入表单标题"
+        />  
+    </div>
+
+    <div class="demo-date-picker">
+    <div class="block">
+      <span class="demonstration">截止日期：</span>
+      <el-date-picker
+        v-model="date"
+        type="date"
+        placeholder="请选择截止日期"
+        :size="size"
+        @change="picked"
+      />
+    </div>
+  </div>
 
     <div>  
+      <div style="margin: 5px 0" />
     <label for="myCheckbox">  
       <input type="checkbox" id="myCheckbox" v-model="only" />  
       填表人只能填写自己的信息  
     </label>  
   </div> 
 
+  <div style="margin: 8px 0" />
+  <span class="demonstration">可以填写该表单的用户类型</span>
+  <div style="margin: 5px 0" />
   <div>  
-    <p>请选择可以填写表单的用户类型</p>
     <label for="myCheckbox">  
       <input type="checkbox" id="myCheckbox" v-model="roleList[0]" />  
       院长  
@@ -40,6 +62,8 @@
       老师 
     </label> 
   </div> 
+
+  <div style="margin: 10px 0" />
   
     <!-- 循环渲染已选择的表单项 --> 
     <p class="demonstration">创建表单项</p> 
@@ -97,7 +121,10 @@
         showForm: false,
         formTitle:'',
         only: 0 ,// 默认不选中 
-        roleList:[0,0,0]
+        roleList:[0,0,0],
+        ddl:'',//2024-06-11
+        date:new Date(),
+        errorMessage:''
       };
     }, 
     computed: {  
@@ -167,22 +194,25 @@
         } 
         }
         const { username } = this; 
-        console.log(this.only);
-        console.log(this.roleList);
         axios.post('http://localhost:8080/createform', {  
           title:this.formTitle,
           Publisher: username,
           Item: this.labelArray,  
           ItemType: this.typeArray,  
           only:this.only,
-          roleList:this.roleList
+          roleList:this.roleList,
+          ddl:this.ddl
         })  
         .then(response => {  
           //console.log('后端返回数据：', response.data); 
           if (response.data.success) { 
-            this.selectedFields=[{ id: 'field1', label: '字段1', type: 'text' }],
-            this.showForm=false,
-            this.formTitle='' 
+            this.selectedFields=[{ id: 'field1', label: '', type: 'text' }],
+            this.showForm= false,
+            this.formTitle='',
+            this.only= 0 ,
+            this.roleList=[0,0,0],
+            this.ddl="",
+            this.date=new Date(),
             router.push('/form-create'); 
             alert('表单创建成功！');
           }

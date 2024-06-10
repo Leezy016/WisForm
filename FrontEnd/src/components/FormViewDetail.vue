@@ -14,7 +14,7 @@
                   <label>{{ itemName }}</label> 
                 </td>
                 <td>
-                  <label>{{ content[index] }}</label> 
+                  <label>{{ this.$store.state.content[index] }}</label> 
                 </td>        
             </tr>    
         </table>    
@@ -49,8 +49,6 @@ export default {
       nums: [],
       curNum: 1,//当前页数默认1
 
-      item: [],
-      content:[],
       getcErrorMessage:'',
       getsErrorMessage:'', 
       changeable:false,
@@ -130,15 +128,20 @@ export default {
 },
 getContent(id){
   //console.log(id),
+  this.$store.commit('SET_ITEM',[]),
+  this.$store.commit('SET_CONTENT', []),
+  this.changeable=false
   axios.post('http://localhost:8080/viewform/getContent', {  
     num:id,
-    title:this.title
+    title:this.title,
   })  
   .then(response => {  
     if (response.data.success) {  
-      console.log("success"),
-      this.item=response.data.item,
-      this.content=response.data.itemValue
+      //console.log("success"),
+      this.$store.commit('SET_ITEM', response.data.item),
+      this.$store.commit('SET_CONTENT', response.data.itemValue),
+      this.changeable=response.data.changeable,
+      console.log(this.changeable)
     }
     else {  
       this.getcErrorMessage = response.data.message || '表单获取失败，请稍后再试';  
