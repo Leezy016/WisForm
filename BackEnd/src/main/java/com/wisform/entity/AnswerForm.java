@@ -26,12 +26,9 @@ public class AnswerForm {
         this.Item = Item;
         this.ItemValue = ItemValue;
     }
-<<<<<<< HEAD
     public AnswerForm(String title){
         this.title = title;
     }
-=======
->>>>>>> FrontEnd
     public String getTitle() {
         return title;
     }
@@ -58,8 +55,4 @@ public class AnswerForm {
     public void setItemValue(List<String>item){
         this.ItemValue = item;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> FrontEnd

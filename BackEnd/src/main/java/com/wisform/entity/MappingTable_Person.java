@@ -14,13 +14,8 @@ public class MappingTable_Person {
         mappingTable.put("gender", Arrays.asList("性别","性"));
         mappingTable.put("birthday", Arrays.asList("出生年月","出生日期"));
         mappingTable.put("degree", Arrays.asList("最终学位或最终学历","学位","学历","最终学历","最终学位"));
-<<<<<<< HEAD
         mappingTable.put("briefIntro", Arrays.asList("简介","骨干教师简介"));
         mappingTable.put("enrollField", Arrays.asList("招生领域","招生范围"));
-=======
-        mappingTable.put("brief-intro", Arrays.asList("简介","骨干教师简介"));
-        mappingTable.put("enroll-field", Arrays.asList("招生领域","招生范围"));
->>>>>>> FrontEnd
     }
 
     //

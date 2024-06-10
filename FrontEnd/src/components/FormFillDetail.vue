@@ -112,7 +112,10 @@
       })  
       .then(response => {  
         if (response.data.success) { 
+          //console.log('表单内容获取成功'); 
           this.item=response.data.item;
+          console.log("item1="),
+          console.log(this.item)
         }
         else {  
           this.getErrorMessage = response.data.message || '表单内容获取失败，请稍后再试';  

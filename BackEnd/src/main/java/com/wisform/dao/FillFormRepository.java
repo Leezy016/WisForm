@@ -32,8 +32,4 @@ public interface FillFormRepository extends Neo4jRepository<FillFormRepository, 
 
     @Query("MATCH (n:FFormat) WHERE ANY(id IN n.roleList WHERE id = $role) RETURN n.name AS name")
     List<String> findFFormatByRole(@Param("role") String role);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> FrontEnd

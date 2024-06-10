@@ -1,11 +1,6 @@
 <template>
   <div class="form-view-detail"> 
     <NavBar /> 
-
-    <div class="welcome">  
-        <img src='@/assets/welcome.png' style="width: 500px; height: 80px;"  />  
-        </div>
-
     <form v-if="this.$store.state.item"  class="form-table">    
         <table>    
             <!-- 循环渲染已选择的表单项为表格形式 -->  
@@ -20,7 +15,7 @@
         </table>    
     </form> 
     <div>
-      <button v-if="changeable" type="view" class="view-btn" @click="goToChange()">修 改</button>
+      <button v-if="changeable" type="view" class="view-btn" @click="goToChange()">修改</button>
     </div> 
 
     <div class="pageination" v-if="sum">
@@ -51,7 +46,7 @@ export default {
 
       getcErrorMessage:'',
       getsErrorMessage:'', 
-      changeable:false,
+      changeable:1,
     };  
   }, 
   components: {  
@@ -59,7 +54,7 @@ export default {
   } ,
   methods:{
     goToChange() {  
-      this.$router.push({ name: 'FormChange', params: { id: this.sum[this.curNum - 1],title:this.title} });  
+      this.$router.push({ name: 'FormChange', params: { id: this.sum[this.curNum - 1]} });  
     } ,
     pageUp(state){
       if (this.curNum - 1 != 0 && state == 1) {
@@ -128,9 +123,6 @@ export default {
 },
 getContent(id){
   //console.log(id),
-  this.$store.commit('SET_ITEM',[]),
-  this.$store.commit('SET_CONTENT', []),
-  this.changeable=false
   axios.post('http://localhost:8080/viewform/getContent', {  
     num:id,
     title:this.title,
@@ -139,9 +131,8 @@ getContent(id){
     if (response.data.success) {  
       //console.log("success"),
       this.$store.commit('SET_ITEM', response.data.item),
-      this.$store.commit('SET_CONTENT', response.data.itemValue),
-      this.changeable=response.data.changeable,
-      console.log(this.changeable)
+      this.$store.commit('SET_CONTENT', response.data.itemValue)
+      //changeable:
     }
     else {  
       this.getcErrorMessage = response.data.message || '表单获取失败，请稍后再试';  
