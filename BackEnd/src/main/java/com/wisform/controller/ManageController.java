@@ -60,8 +60,4 @@ public class ManageController {
 
 
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> FrontEnd

@@ -32,20 +32,13 @@ public class AnswerService {
 
     }
 
-<<<<<<< HEAD
-=======
     public boolean converbyid(Long id,List<String> item,List<String> itemvalue){
         answerRepository.coverById(id,item,itemvalue);
         return true;
     }
 
->>>>>>> FrontEnd
     public List<String> GetAnswersId(String name) {
         // 调用仓库方法获取答案列表
         return answerRepository.findAnswersByFillerName(name);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> FrontEnd

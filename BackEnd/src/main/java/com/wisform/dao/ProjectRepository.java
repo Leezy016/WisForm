@@ -23,8 +23,4 @@ public interface ProjectRepository extends Neo4jRepository<ProjectRepository, Lo
     @Query("MATCH (p:Project)WHERE p.name = $value RETURN p.name")
     String findByKey(String value);
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> FrontEnd
