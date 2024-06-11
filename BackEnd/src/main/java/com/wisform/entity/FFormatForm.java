@@ -1,74 +1,55 @@
 package com.wisform.entity;
 
-import lombok.Data;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Property;
-
 import java.util.Date;
 import java.util.List;
 
-@Data
-@NodeEntity(label="FFormat")
-public class FFormat {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @Property
-    private String name;
-
-    @Property
+public class FFormatForm {
+    private String title;
     private String Publisher;
-
-    //@Property
     //private Date LanchDate;
-
-    @Property
     private List<String> Item;
-
-    @Property
     private List<String> ItemType;
 
-    @Property
-    private List<String> roleList;//权限列表
-    @Property
-    private Long only;//只能自己填
+    private List<String>roleList;
 
-    @Property
+    private boolean only;
+
     private  String  ddl;
 
-    public FFormat(List<String> Item,List<String> ItemType,String Publisher,String name,List<String> roleList,Long only,String ddl) {
-        this.name = name;
+
+    public FFormatForm(String title, String Publisher, List<String> Item,List<String> ItemType,List<String>roelList,boolean only,String ddl) {
+        this.title = title;
         this.Publisher = Publisher;
-        //this.LanchDate = LanchDate;
         this.Item = Item;
         this.ItemType = ItemType;
+        this.ddl = ddl;
         this.roleList = roleList;
         this.only = only;
-        this.ddl = ddl;
     }
-    public FFormat(String name){
-        this.name = name;
-    }
-
-    public FFormat(){}
-
-
-    public List<String>getItem(){
-        return Item;
+    public String getname() {
+        return title;
     }
 
-    public List<String>getItemType(){
+    public String getPublisher() {
+        return Publisher;
+    }
+
+    //public Date getLanchDate() {
+    //    return LanchDate;
+   // }
+
+    public List<String> getItem() {return Item;}
+
+    public List<String> getItemType(){
         return ItemType;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getDDl() {
         return ddl;
     }
+
+    public List<String> getRoleList() { return roleList; }
+
+    public boolean getOnly() { return only; }
+
 }
