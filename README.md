@@ -1,5 +1,3 @@
 # WisForm
+https://github.com/Leezy016/WisForm/wiki
 ![](WisFormLogo.png)  
-
-Form collecting Web App  
-SpringBoot Vue3 Neo4j  
